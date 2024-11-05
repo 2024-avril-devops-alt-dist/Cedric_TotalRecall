@@ -1,0 +1,42 @@
+#### TotalRecall ###
+services:
+  nextjs: #### NextJS ###
+    image: node:18-alpine
+    container_name: nextjs
+    working_dir: /app
+    volumes:
+      - ./:/app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - mongo
+
+  mongo:  #### MongoDB ###
+    image: mongo:5
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  prisma-studio: #### Prisma-Studio ###
+    image: node:18-alpine
+    container_name: prisma-studio
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "5555:5555"
+    command: ["npx", "prisma", "studio"]
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
