@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma-seed": "tsx prisma/seed.ts"
+    "prisma-seed": "tsx prisma/seed.ts",
+    "resetdb": "npx prisma db push --force-reset && npm run seed"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",

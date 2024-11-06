@@ -2,7 +2,7 @@
 services:
   nextjs: #### NextJS et Prisma ###
     image: node:18-alpine
-    container_name: app
+    container_name: nextjs
     working_dir: /app
     volumes:
       - ./:/app
@@ -25,6 +25,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+      - ./mongo_backup:/data/ ## Pour sauvegarder les données dans le répertoire mongo_backup
     command: --replSet rs0
 
 volumes:

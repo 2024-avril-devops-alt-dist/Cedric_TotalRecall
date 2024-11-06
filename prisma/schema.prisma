@@ -8,20 +8,52 @@ datasource db {
   url      = env("DATABASE_URL") 
 } 
 
+
 model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  email String @unique
+  id_user String @id @default(auto()) @map("_id")  @db.ObjectId
+  mail          String? 
+  password      String?
+  phone         Int?    @db.Int
 }
 
-model Post {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  title String  
+model Passenger {
+  id_passenger String @id @default(auto()) @map("_id")  @db.ObjectId
+  first_name   String 
+  last_name    String 
+  mail         String? 
+  DOB          DateTime
 }
 
-model Comment  {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  title String  
+model Company {
+  id_company   String @id @default(auto()) @map("_id")  @db.ObjectId
+  company_name String 
+}
+
+model Station {
+  id_station   String @id @default(auto()) @map("_id")  @db.ObjectId
+  station_name String 
+}
+
+model Travel {
+  id_travel      String @id @default(auto()) @map("_id")  @db.ObjectId
+  travel_company String
+  status_travel  String 
+}
+
+model Flight {
+  id_flight           String @id @default(auto()) @map("_id")  @db.ObjectId
+  id_travel           String
+  departure_station   String
+  arrival_station     String
+  departure_day_time  DateTime
+  arrival_day_time    DateTime
+  seats               Int    @db.Int
+}
+model Reservation {
+  id                  String @id @default(auto()) @map("_id")  @db.ObjectId
+  id_travel           String
+  id_company          String
+  id_account          String
+  id_passenger        String
+  status_reservation  String 
 }
