@@ -9,7 +9,7 @@ datasource db {
 } 
 
 
-model User {
+model Users {
   id_user String @id @default(auto()) @map("_id")  @db.ObjectId
   mail          String? 
   password      String?
