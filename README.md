@@ -30,5 +30,6 @@ rs.status()
 
 use nextjsdb
 show collections
-db.posts.insertMany([{ name: 'Ced', email: 'hello@prisma.com' }]);
-db.posts.find().pretty()
+db.station.insertMany([{ name: 'Mars' }]);
+db.users.insertMany([{ mail: 'ced@ced.fr' }]);
+db.users.find().pretty()
