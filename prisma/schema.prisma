@@ -9,51 +9,87 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
-  id_user String @id @default(auto()) @map("_id")  @db.ObjectId
-  mail          String? 
-  password      String?
-  phone         Int?    @db.Int
+model User {
+  id_user       String       @id @default(auto()) @map("_id") @db.ObjectId
+  mail          String       @unique
+  password      String
+  phone         String?
+  role          String       @default("USER")
+  reservations  Reservation[]
+  passengers    Passenger[]
+  travels       Travel[]     @relation("UserTravels")
+
+  @@map("User")
 }
 
 model Passenger {
-  id_passenger String @id @default(auto()) @map("_id")  @db.ObjectId
-  first_name   String 
-  last_name    String 
-  mail         String? 
-  DOB          DateTime
+  id_passenger  String       @id @default(auto()) @map("_id") @db.ObjectId
+  first_name    String
+  last_name     String
+  mail          String?
+  DOB           DateTime
+  user          User?        @relation(fields: [userId], references: [id_user])
+  userId        String?      @db.ObjectId
+
+  @@map("Passenger")
 }
 
 model Company {
-  id_company   String @id @default(auto()) @map("_id")  @db.ObjectId
-  company_name String 
+  id_company    String       @id @default(auto()) @map("_id") @db.ObjectId
+  company_name  String
+  travels       Travel[]     @relation("CompanyTravels")
+  reservations  Reservation[]
+
+  @@map("Company")
 }
 
 model Station {
-  id_station   String @id @default(auto()) @map("_id")  @db.ObjectId
-  station_name String 
+  id_station       String     @id @default(auto()) @map("_id") @db.ObjectId
+  station_name     String
+  departure_flights Flight[]  @relation("DepartureFlights")
+  arrival_flights   Flight[]  @relation("ArrivalFlights")
+
+  @@map("Station")
 }
 
 model Travel {
-  id_travel      String @id @default(auto()) @map("_id")  @db.ObjectId
-  travel_company String
-  status_travel  String 
+  id_travel      String       @id @default(auto()) @map("_id") @db.ObjectId
+  travel_company String       @db.ObjectId
+  status_travel  String
+  flights        Flight[]
+  reservations   Reservation[]
+  company        Company?     @relation("CompanyTravels", fields: [travel_company], references: [id_company])
+  user           User?        @relation("UserTravels", fields: [userId], references: [id_user])
+  userId         String?      @db.ObjectId
+
+  @@map("Travel")
 }
 
 model Flight {
-  id_flight           String @id @default(auto()) @map("_id")  @db.ObjectId
-  id_travel           String
-  departure_station   String
-  arrival_station     String
-  departure_day_time  DateTime
-  arrival_day_time    DateTime
-  seats               Int    @db.Int
+  id_flight            String     @id @default(auto()) @map("_id") @db.ObjectId
+  id_travel            String     @db.ObjectId
+  departure_station    String     @db.ObjectId
+  arrival_station      String     @db.ObjectId
+  departure_day_time   DateTime
+  arrival_day_time     DateTime
+  seats                Int
+  travel               Travel     @relation(fields: [id_travel], references: [id_travel])
+  departureStation     Station    @relation("DepartureFlights", fields: [departure_station], references: [id_station])
+  arrivalStation       Station    @relation("ArrivalFlights", fields: [arrival_station], references: [id_station])
+
+  @@map("Flight")
 }
+
 model Reservation {
-  id                  String @id @default(auto()) @map("_id")  @db.ObjectId
-  id_travel           String
-  id_company          String
-  id_account          String
-  id_passenger        String
-  status_reservation  String 
+  id_reservation     String     @id @default(auto()) @map("_id") @db.ObjectId
+  id_travel          String     @db.ObjectId
+  id_company         String     @db.ObjectId
+  id_user            String     @db.ObjectId
+  id_passenger       String
+  status_reservation String?
+  travel             Travel     @relation(fields: [id_travel], references: [id_travel])
+  company            Company    @relation(fields: [id_company], references: [id_company])
+  user               User       @relation(fields: [id_user], references: [id_user])
+
+  @@map("Reservation")
 }
