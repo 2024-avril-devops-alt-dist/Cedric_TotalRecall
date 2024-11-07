@@ -1,43 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { checkDatabase } from "../../utils/connectDB";
  
 const prisma = new PrismaClient();
  
-export async function GET(req: NextRequest) {
-  if (!process.env.DATABASE_URL) {
-    return NextResponse.json(
-      { error: "DATABASE_URL is not set" },
-      { status: 500 }
-    );
-  }
+/* ######## Collection variable ########## */
+  const collection = "company"; 
+  const response = "companies";
   
+/*-------------------------- GET ---------------------------------*/
+export async function GET(req: NextRequest) {
+  const dbCheck = checkDatabase();
+
+
+  if (dbCheck) return dbCheck;
+
   try {
-    const compagnies = await prisma.company.findMany();
-    return NextResponse.json(compagnies ?? []);
+    const data = await prisma[collection].findMany();
+    return NextResponse.json({ [response]: data ?? [] });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch compagnies" },
+      { error: `Failed to fetch ${collection}` },
       { status: 500 }
     );
   }
 }
- 
+
+/*-------------------------- POST ---------------------------------*/
 export async function POST(req: NextRequest) {
-  if (!process.env.DATABASE_URL) {
-    return NextResponse.json(
-      { error: "DATABASE_URL is not set" },
-      { status: 500 }
-    );
-  }
-  
+  const dbCheck = checkDatabase();
+  if (dbCheck) return dbCheck;
+
   try {
     const body = await req.json();
-    const newStation = await prisma.station.create({
+    const newData = await prisma[collection].create({
       data: body,
     });
-    return NextResponse.json(newStation);
+    return NextResponse.json({ [response]: newData });
   } catch (error) {
-    console.error("Erreur lors de la création de la station:", error);
-    return NextResponse.json({ error: "Failed to create station" }, { status: 500 });
+    return NextResponse.json(
+      { error: `Failed to create ${collection}` },
+      { status: 500 }
+    );
   }
 }

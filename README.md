@@ -28,8 +28,12 @@ rs.status()
 
 
 
-use nextjsdb
+use totalRecall
 show collections
 db.station.insertMany([{ name: 'Mars' }]);
 db.users.insertMany([{ mail: 'ced@ced.fr' }]);
 db.users.find().pretty()
+
+Corriger 
+failed to solve: failed to prepare  xxx as xxx: max depth exceeded --> a tester :
+docker builder prune
