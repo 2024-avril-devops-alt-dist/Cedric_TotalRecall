@@ -25,6 +25,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+      - ./init-replica-set.js:/docker-entrypoint-initdb.d/init-replica-set.js
       - ./mongo_backup:/data/ ## Pour sauvegarder les données dans le répertoire mongo_backup
     command: --replSet rs0
 

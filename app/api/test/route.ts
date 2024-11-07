@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function GET(req: NextRequest) {
   try {
     await prisma.$connect();
-    return NextResponse.json({ message: "Connexion à la base de données réussie" });
+    return NextResponse.json({ message: "Connexion à la base de donnéesaaa réussie" });
   } catch (error) {
     console.error("Erreur de connexion à la base de données:", error);
     return NextResponse.json(

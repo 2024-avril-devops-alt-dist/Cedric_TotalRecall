@@ -12,11 +12,11 @@ export async function GET(req: NextRequest) {
   }
   
   try {
-    const users = await prisma.users.findMany();
-    return NextResponse.json(users ?? []);
+    const compagnies = await prisma.company.findMany();
+    return NextResponse.json(compagnies ?? []);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch users" },
+      { error: "Failed to fetch compagnies" },
       { status: 500 }
     );
   }

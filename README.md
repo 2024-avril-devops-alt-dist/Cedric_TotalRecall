@@ -17,7 +17,18 @@ To run this API we need to have :
 * Configure Mongo container :
     * Go to the mongo container : ```docker exec -it mongo mongosh```
     * ```rs.initiate()```
-    * To configure the host : ```rs.reconfig({ _id: 'rs0', members: [ { _id: 0, host: mongo:27017' }] }, { force: true });```
+    * To configure the host : ```rs.reconfig({ _id: 'rs0', members: [ { _id: 0, host: 'mongo:27017' }] }, { force: true });```
     * To show the config ```rs.status()```
     * Exit the container ```exit```
 
+docker exec -it mongo mongosh
+rs.initiate()
+rs.reconfig({ _id: 'rs0', members: [ { _id: 0, host: 'mongo:27017' }] }, { force: true });
+rs.status()
+
+
+
+use nextjsdb
+show collections
+db.posts.insertMany([{ name: 'Ced', email: 'hello@prisma.com' }]);
+db.posts.find().pretty()
