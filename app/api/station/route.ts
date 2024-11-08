@@ -4,8 +4,10 @@ import { checkDatabase } from "../../utils/connectDB";
  
 const prisma = new PrismaClient();
  
+/* ######## Collection variable ########## */
   const collection = "station"; 
   const response = "stations";
+
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {
   const dbCheck = checkDatabase();
