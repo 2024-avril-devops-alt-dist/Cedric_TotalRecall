@@ -17,8 +17,6 @@ services:
     depends_on:
       - mongo
     command: ["sh", "-c", "npx next dev & npx prisma studio", "npx prisma generate"]
-    networks:
-      - totalRecall-network
 
   mongo:  #### MongoDB ###
     image: mongo:5
@@ -27,15 +25,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db 
-      - ./init-replica-set.js:/docker-entrypoint-initdb.d/init-replica-set.js
       - ./mongo_backup:/data/ ## Pour sauvegarder les données dans le répertoire mongo_backup
     command: --replSet rs0
-    networks:
-      - totalRecall-network
 
 volumes:
   mongo-data:
-
-networks:
-  totalRecall-network:
-    driver: bridge
