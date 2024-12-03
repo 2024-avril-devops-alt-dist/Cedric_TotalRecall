@@ -20,15 +20,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          console.log('------------auth : ', credentials);
+          console.log('------------auth : ');
           const user = await db.user.findUnique({
             where: { email: credentials?.email as string },
           });
-/*      
+      
           if (user && (await bcrypt.compare(credentials.password, user.password))) {
             return { id: user.id_user, email: user.email };
           }
-  */    
+      
           throw new Error("Invalid credentials");
         } catch (error) {
           console.error("Error in authorize: ", error);

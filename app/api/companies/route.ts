@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   if (dbCheck) return dbCheck;
 
   const session = await auth(req);
-  if (!session ) {
+  if (!session || !session.user) {
     return new Response(
       JSON.stringify({ error: "Unauthorized" }),
       { status: 401, headers: { "Content-Type": "application/json" } }
