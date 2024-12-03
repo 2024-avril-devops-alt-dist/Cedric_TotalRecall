@@ -9,8 +9,9 @@ import { signInSchema } from "./lib/zod"
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
  
-console.log('------------Dansauth : ');
+console.log('------------ Dans auth.js ------------- ');
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  debug:true,
   adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({
@@ -19,8 +20,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
+        console.log("eee", credentials);
         try {
-          console.log('------------auth : ');
           const user = await db.user.findUnique({
             where: { email: credentials?.email as string },
           });
