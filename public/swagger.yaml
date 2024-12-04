@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: Total Recall
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Auth
+  - name: Compagnies
+  - name: Flights
+  - name: Stations
+  - name: Travels
+  - name: Users
+paths:
+  /api/auth/signin:
+    get:
+      tags:
+        - Auth
+      summary: Auth user
+      parameters:
+        - name: ''
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/companies:
+    get:
+      tags:
+        - Compagnies
+      summary: Company
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Compagnies
+      summary: Company create
+      description: |-
+        ### Add Company
+
+        This endpoint allows the client to add a new company to the database.
+
+        #### Request Body
+
+        - `company_name`: (string) The name of the company to be added.
+            
+
+        #### Response
+
+        The response will contain the status of the request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                company_name: ettttttttttCorsica Ferry
+      parameters:
+        - name: x-csrf-token
+          in: header
+          schema:
+            type: string
+          example: d2ccbbca5f64f048e1018f54b8c3fde78c7ba9cceb9b61255bd54b25337fcb3d
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Compagnies
+      summary: Company delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Compagnies
+      summary: Company update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_company: 672e1cda44be5d77da347d67
+                company_name: Air Saturn
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/flights:
+    get:
+      tags:
+        - Flights
+      summary: Flights
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Flights
+      summary: Flight update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_flight: 674ff32027282c9c42a56101
+                seats: '45'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Flights
+      summary: Flight delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/stations:
+    get:
+      tags:
+        - Stations
+      summary: Stations
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Stations
+      summary: Stations create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                station_name: Air Francfdsdf666
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Stations
+      summary: Stations update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_station: 674fdff56cefcad6926f8c7d
+                station_name: Saturn
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Stations
+      summary: Stations delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/travels:
+    get:
+      tags:
+        - Travels
+      summary: Travels
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Travels
+      summary: Add travel with flights
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status_travel: active
+                company_id: 674ed90e4b8a548f7df967ba
+                flights:
+                  - departure_station: 674e95de9c5067bec0b24c79
+                    arrival_station: 674eade2f84536c9225481ad
+                    departure_day_time: '2025-12-05T08:00:00.000Z'
+                    arrival_day_time: '2025-12-05T12:00:00.000Z'
+                    seats: 100
+                  - departure_station: 674eade2f84536c9225481ad
+                    arrival_station: 674fdff56cefcad6926f8c7d
+                    departure_day_time: '2025-12-06T09:00:00.000Z'
+                    arrival_day_time: '2025-12-06T13:00:00.000Z'
+                    seats: 150
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Travels
+      summary: Travel update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status_travel: inactive
+                id_travel: 67500c03beeb6324e15d3af5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Travels
+      summary: Travel delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/travels/674ff1fad145d98354547166:
+    get:
+      tags:
+        - Travels
+      summary: Travel by ID
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/users:
+    get:
+      tags:
+        - Users
+      summary: Users
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Users
+      summary: User create
+      description: >-
+        ### Add User
+
+
+        This endpoint allows the client to add a new user to the system.
+
+
+        #### Request Body
+
+
+        - `email` (string): The email address of the user.
+            
+        - `password` (string): The password for the user account.
+            
+        - `phone` (string): The phone number of the user.
+            
+
+        #### Response
+
+
+        The response will include the status of the request and any relevant
+        message or data.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: ced@ced.fr
+                password: '123456'
+                phone: '0123456789'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

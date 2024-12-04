@@ -11,7 +11,6 @@ import { db } from "@/lib/db";
  
 console.log('------------ Dans auth.js ------------- ');
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  debug:true,
   adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({
