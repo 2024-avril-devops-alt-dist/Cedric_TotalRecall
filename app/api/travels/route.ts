@@ -107,17 +107,17 @@ export async function DELETE(req: NextRequest) {
   if (dbCheck) return dbCheck;
 
   try {
-    const { [id_collection]: idValue } = await req.json();
-    console.log('------------delete  : ', idValue)
+    const { id_travel } = await req.json(); 
+    console.log('------------delete id_travel : ', id_travel)
 
-    if (!idValue) {
+    if (!id_travel) {
       return NextResponse.json(
         { error: `ID is required to delete ${collection}` },
         { status: 400 }
       );
     }
 
-    console.log('------------Delete associate flights  : ', idValue)
+    console.log('------------Delete associate flights  : ', id_travel)
     // Delete associate flights
     await prisma.flight.deleteMany({
       where: { travel_id: id_travel.toString() },
@@ -125,7 +125,7 @@ export async function DELETE(req: NextRequest) {
 
     // Delete travel
     const deletedData = await prisma[collection].delete({
-      where: { [id_collection]: idValue },
+      where: { [id_collection]: id_travel },
     });
 
     return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });

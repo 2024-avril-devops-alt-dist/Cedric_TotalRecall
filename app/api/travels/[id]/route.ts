@@ -11,8 +11,41 @@ const prisma = new PrismaClient();
   const response = "travels";
   const id_collection = "id_travel"
   
-  console.log("*--------DANS ROUTE -----------*/ ",response)
 /*-------------------------- GET ---------------------------------*/
+
+/*---------GET by ID-----------*/
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.pathname.split("/").pop();
+  console.log("*---------GET ALL-----------*/ ",id)
+
+  try {
+    const data = await prisma[collection].findUnique({
+      where: { id_travel: id },
+      include: {
+        flights: {
+          include: {
+            departure_station: true,
+            arrival_station: true,
+          },
+        },
+        company: true,
+      },
+    });
+
+    if (!data) {
+      return new Response(JSON.stringify({ message: 'Travel not found' }), { status: 404 });
+    }
+
+    return NextResponse.json({ [response]: data ?? [] });
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
+  }
+}
+
+
+
+
 /*
 export async function GET(req: NextRequest) {
   const dbCheck = checkDatabase();
@@ -51,33 +84,3 @@ export async function GET(req: NextRequest) {
   }
 }
 */
-
-/*---------GET by ID-----------*/
-export async function GET(req: NextRequest) {
-  const id = req.nextUrl.pathname.split("/").pop();
-  console.log("*---------GET ALL-----------*/ ",id)
-
-  try {
-    const data = await prisma[collection].findUnique({
-      where: { id_travel: id },
-      include: {
-        flights: {
-          include: {
-            departure_station: true,
-            arrival_station: true,
-          },
-        },
-        company: true,
-      },
-    });
-
-    if (!data) {
-      return new Response(JSON.stringify({ message: 'Travel not found' }), { status: 404 });
-    }
-
-    return NextResponse.json({ [response]: data ?? [] });
-  } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ message: 'Internal server error' }), { status: 500 });
-  }
-}

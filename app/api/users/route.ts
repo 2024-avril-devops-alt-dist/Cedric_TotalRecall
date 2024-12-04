@@ -3,6 +3,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../utils/connectDB";
+import { signInSchema } from "@/lib/zod";
+import { z } from "zod";
 import bcrypt from 'bcryptjs';
  
 const prisma = new PrismaClient();
@@ -37,10 +39,35 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const hashedPassword = await bcrypt.hash(body.password, 10);
-    const newData = await prisma[collection].create({
-      data: { ...body, password: hashedPassword },
+
+    // Zod Validation 
+    const parsedData = signInSchema.safeParse(body);
+    if (!parsedData.success) {
+      return NextResponse.json(
+        { error: "Invalid input", details: parsedData.error.flatten() },
+        { status: 400 }
+      );
+    }
+
+    const { email, password } = parsedData.data;
+
+    // Vérification si l'email existe
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
     });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "Cet email est déjà utilisé" },
+        { status: 400 }
+      );
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newData = await prisma[collection].create({
+      data: { ...parsedData.data, password: hashedPassword },
+    });
+
     return NextResponse.json({ [response]: newData });
   } catch (error) {
     console.error('Error creating data:', error);
