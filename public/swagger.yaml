@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Total Recall
-  version: 1.0.0
+  version: 1.1.0
 servers:
   - url: http://localhost:3000
 tags:
@@ -12,7 +12,7 @@ tags:
   - name: Travels
   - name: Users
 paths:
-  /api/auth/signin:
+  /api/v1/auth/signin:
     get:
       tags:
         - Auth
@@ -27,7 +27,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/companies:
+  /api/v1/companies:
     get:
       tags:
         - Compagnies
@@ -60,7 +60,7 @@ paths:
             schema:
               type: object
               example:
-                company_name: ettttttttttCorsica Ferry
+                company_name: Corsica Ferry
       parameters:
         - name: x-csrf-token
           in: header
@@ -98,7 +98,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/flights:
+  /api/v1/flights:
     get:
       tags:
         - Flights
@@ -134,7 +134,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/stations:
+  /api/v1/stations:
     get:
       tags:
         - Stations
@@ -186,7 +186,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/travels:
+  /api/v1/travels:
     get:
       tags:
         - Travels
@@ -250,7 +250,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/travels/674ff1fad145d98354547166:
+  /api/v1/travels/674ff1fad145d98354547166:
     get:
       tags:
         - Travels
@@ -260,7 +260,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/users:
+  /api/v1/users:
     get:
       tags:
         - Users
@@ -302,8 +302,8 @@ paths:
             schema:
               type: object
               example:
-                email: ced@ced.fr
-                password: '123456'
+                email: ced@ced2.fr
+                password: '123456123456'
                 phone: '0123456789'
       responses:
         '200':

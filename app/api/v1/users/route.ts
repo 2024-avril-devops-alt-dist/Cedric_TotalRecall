@@ -1,8 +1,8 @@
-// api/users/route.ts
+// app/api/v?/users/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { checkDatabase } from "../../utils/connectDB";
+import { checkDatabase } from "../../../utils/connectDB";
 import { signInSchema } from "@/lib/zod";
 import { z } from "zod";
 import bcrypt from 'bcryptjs';

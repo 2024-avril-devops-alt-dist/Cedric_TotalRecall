@@ -1,34 +1,26 @@
-// app/api/travels/route.ts
+// app/api/v?/compagnies/route.ts
+
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { checkDatabase } from "../../utils/connectDB";
+import { checkDatabase } from "../../../utils/connectDB";
  
 const prisma = new PrismaClient();
- 
-  /* ############ Collection variable ############# */
-  const collection = "travel"; 
-  const response = "travels";
-  const id_collection = "id_travel"
+
+/* ######## Collection variable ########## */ 
+  const collection = "flight"; 
+  const response = "flights";
+  const id_collection = "id_flight"
   
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {
   const dbCheck = checkDatabase();
 
+
   if (dbCheck) return dbCheck;
 
   try {
-    const data = await prisma[collection].findMany({
-      include: {
-        flights: {
-          include: {
-            departure_station: true,
-            arrival_station: true,
-          },
-        },
-        company: true,
-      },
-    });
+    const data = await prisma[collection].findMany();
     return NextResponse.json({ [response]: data ?? [] });
   } catch (error) {
     return NextResponse.json(
@@ -40,30 +32,18 @@ export async function GET(req: NextRequest) {
 
 /*-------------------------- POST ---------------------------------*/
 export async function POST(req: NextRequest) {
+  const dbCheck = checkDatabase();
+  if (dbCheck) return dbCheck;
+
   try {
     const body = await req.json();
-
-    const newTravel = await prisma.travel.create({
-      data: {
-        status_travel: body.status_travel,
-        company_id: body.company_id,
-        flights: {
-          create: body.flights.map((flight: any) => ({
-            departure_station: { connect: { id_station: flight.departure_station } },
-            arrival_station: { connect: { id_station: flight.arrival_station } },
-            departure_day_time: flight.departure_day_time,
-            arrival_day_time: flight.arrival_day_time,
-            seats: flight.seats,
-          })),
-        },
-      },
+    const newData = await prisma[collection].create({
+      data: body,
     });
-
-    return NextResponse.json({ travel: newTravel });
+    return NextResponse.json({ [response]: newData });
   } catch (error) {
-    console.error(error);
     return NextResponse.json(
-      { error: 'Failed to create Travel' },
+      { error: `Failed to create ${collection}` },
       { status: 500 }
     );
   }
@@ -78,7 +58,7 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     console.log("Dans update",body )
     const { [id_collection]: idValue, ...dataToUpdate } = body;
-console.log("----------------------id_collection :", id_collection)
+console.log("----------------------id_collection :", idValue)
     if (!idValue) {
       return NextResponse.json(
         { error: `ID is required to update ${collection}` },
@@ -107,25 +87,17 @@ export async function DELETE(req: NextRequest) {
   if (dbCheck) return dbCheck;
 
   try {
-    const { id_travel } = await req.json(); 
-    console.log('------------delete id_travel : ', id_travel)
+    const { [id_collection]: idValue } = await req.json();
 
-    if (!id_travel) {
+    if (!idValue) {
       return NextResponse.json(
         { error: `ID is required to delete ${collection}` },
         { status: 400 }
       );
     }
 
-    console.log('------------Delete associate flights  : ', id_travel)
-    // Delete associate flights
-    await prisma.flight.deleteMany({
-      where: { travel_id: id_travel.toString() },
-    });
-
-    // Delete travel
     const deletedData = await prisma[collection].delete({
-      where: { [id_collection]: id_travel },
+      where: { [id_collection]: idValue },
     });
 
     return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });

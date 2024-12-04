@@ -1,6 +1,8 @@
+// app/api/v?/stations/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { checkDatabase } from "../../utils/connectDB";
+import { checkDatabase } from "../../../utils/connectDB";
  
 const prisma = new PrismaClient();
  
