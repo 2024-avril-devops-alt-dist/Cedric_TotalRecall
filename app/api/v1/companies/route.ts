@@ -3,44 +3,43 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../utils/connectDB";
-import { auth } from "@/auth";
-import { getToken } from "next-auth/jwt";
+import { protectRoute } from "@/lib/auth"; 
+
 const prisma = new PrismaClient();
+   /* TO PROTECT ROUTE ADD
+  const token = await protectRoute(req);
+  if (token instanceof Response) { return token;  }
+  */
  
 /* ######## Collection variable ########## */
   const collection = "company"; 
   const response = "companies";
   const id_collection = "id_company"
 
+/*-------------------------- GET ---------------------------------*/
+
+export async function GET(req: NextRequest) {
+  const dbCheck = checkDatabase();
+
+  if (dbCheck) return dbCheck;
+
+  try {
+    const data = await prisma[collection].findMany();
+    return NextResponse.json({ [response]: data ?? [] });
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Failed to fetch ${collection}` },
+      { status: 500 }
+    );
+  }
+}
+
 /*-------------------------- POST ---------------------------------*/
 export async function POST(req: NextRequest) {
   const dbCheck = checkDatabase();
   if (dbCheck) return dbCheck;
 
-
   try {
-    console.log("Étape 1 : Début de la requête");
-    console.log("Tous les headers : ", req.headers);
-
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-    console.log("Étape 2 : Token récupéré", token);
-
-    if (!token) {
-      console.log("Étape 3 : Aucun token trouvé, utilisateur non autorisé");
-      return new Response(
-        JSON.stringify({ error: "Unauthorized" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
-      );
-    }
-
-    console.log("Étape 4 : Utilisateur authentifié avec succès", token);
-    const resssponse = {
-      message: "Access granted",
-      user: token,
-    };
-    console.log("Étape 5 : Réponse à retourner", resssponse);
-
-
     const body = await req.json();
     const newData = await prisma[collection].create({
       data: body,
@@ -50,45 +49,6 @@ export async function POST(req: NextRequest) {
     console.error("Étape 6 : Erreur détectée", error);
     return NextResponse.json(
       { error: `Failed to create ${collection}` },
-      { status: 500 }
-    );
-  }
-}
-
-/*-------------------------- GET ---------------------------------*/
-export async function GET(req: NextRequest) {
-  const dbCheck = checkDatabase();
-
-  if (dbCheck) return dbCheck;
-
-  try {
-    console.log("Étape 1 : Début de la requête");
-    console.log("Tous les headers : ", req.headers);
-
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-    console.log("Étape 2 : Token récupéré", token);
-
-    if (!token) {
-      console.log("Étape 3 : Aucun token trouvé, utilisateur non autorisé");
-      return new Response(
-        JSON.stringify({ error: "Unauthorized" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
-      );
-    }
-
-    console.log("Étape 4 : Utilisateur authentifié avec succès", token);
-    const resssponse = {
-      message: "Access granted",
-      user: token,
-    };
-    console.log("Étape 5 : Réponse à retourner", resssponse);
-
-
-    const data = await prisma[collection].findMany();
-    return NextResponse.json({ [response]: data ?? [] });
-  } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to fetch ${collection}` },
       { status: 500 }
     );
   }

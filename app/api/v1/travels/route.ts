@@ -1,9 +1,8 @@
-// app/api/v?/travels/route.ts
+// app/api/travels/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../utils/connectDB";
-import { protectRoute } from "@/lib/auth"; 
  
 const prisma = new PrismaClient();
  
@@ -15,12 +14,8 @@ const prisma = new PrismaClient();
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {
   const dbCheck = checkDatabase();
+
   if (dbCheck) return dbCheck;
-  
-  const token = await protectRoute(req);
-  if (token instanceof Response) {
-    return token; 
-  }
 
   try {
     const data = await prisma[collection].findMany({

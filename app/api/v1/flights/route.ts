@@ -1,22 +1,28 @@
-// app/api/v?/compagnies/route.ts
-
+// app/api/v?/flights/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../utils/connectDB";
- 
-const prisma = new PrismaClient();
+import { protectRoute } from "@/lib/auth"; 
 
-/* ######## Collection variable ########## */ 
+const prisma = new PrismaClient();
+   /* TO PROTECT ROUTE ADD
+  const token = await protectRoute(req);
+  if (token instanceof Response) { return token;  }
+  */
+ 
+/* ######## Collection variable ########## */
   const collection = "flight"; 
   const response = "flights";
   const id_collection = "id_flight"
   
+
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {
+  const id = req.nextUrl.pathname.split("/").pop();
+  if (id && id !== response) return GETByID(req);
+
   const dbCheck = checkDatabase();
-
-
   if (dbCheck) return dbCheck;
 
   try {
@@ -29,6 +35,26 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
+/*-------------------------- GET by ID ---------------------------------*/
+async function GETByID(req: NextRequest) {
+  const id = req.nextUrl.pathname.split("/").pop();
+  const dbCheck = checkDatabase();
+  if (dbCheck) return dbCheck;
+
+  try {
+    const data = await prisma[collection].findUnique({
+      where: { [id_collection]: id },
+    });
+    return NextResponse.json({ [response]: data ?? [] });
+  } catch (error) {
+    return NextResponse.json(
+      { error: `Failed to fetch ${collection}` },
+      { status: 500 }
+    );
+  }
+}
+
 
 /*-------------------------- POST ---------------------------------*/
 export async function POST(req: NextRequest) {

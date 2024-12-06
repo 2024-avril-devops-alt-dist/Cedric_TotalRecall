@@ -78,18 +78,19 @@ model Travel {
 
 model Flight {
   id_flight          String   @id @default(auto()) @map("_id") @db.ObjectId
-  travel             Travel   @relation(fields: [travel_id], references: [id_travel], onDelete: Cascade)
-  travel_id          String   @db.ObjectId
+  departure_day_time DateTime
+  arrival_day_time   DateTime
   departure_station  Station  @relation("DepartureFlights", fields: [departure_station_id], references: [id_station])
   departure_station_id String @db.ObjectId
   arrival_station    Station  @relation("ArrivalFlights", fields: [arrival_station_id], references: [id_station])
-  arrival_station_id String   @db.ObjectId
-  departure_day_time DateTime
-  arrival_day_time   DateTime
+  arrival_station_id   String @db.ObjectId
+  travel             Travel? @relation(fields: [travel_id], references: [id_travel])
+  travel_id          String? @db.ObjectId
   seats              Int
 
   @@map("Flight")
 }
+
 
 model Reservation {
   id_reservation     String     @id @default(auto()) @map("_id") @db.ObjectId

@@ -6,12 +6,18 @@ import { checkDatabase } from "../../../utils/connectDB";
 import { signInSchema } from "@/lib/zod";
 import { z } from "zod";
 import bcrypt from 'bcryptjs';
- 
+import { protectRoute } from "@/lib/auth"; 
+
 const prisma = new PrismaClient();
+   /* TO PROTECT ROUTE ADD
+  const token = await protectRoute(req);
+  if (token instanceof Response) { return token;  }
+  */
  
 /* ######## Collection variable ########## */
   const collection = "user"; 
   const response = "users";
+  const id_collection = "id_user"
 
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {

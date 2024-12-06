@@ -1,12 +1,13 @@
 openapi: 3.0.0
 info:
   title: Total Recall
-  version: 1.1.0
+  version: 1.0.0
 servers:
   - url: http://localhost:3000
 tags:
   - name: Auth
   - name: Compagnies
+  - name: Booking
   - name: Flights
   - name: Stations
   - name: Travels
@@ -22,6 +23,16 @@ paths:
           in: header
           schema:
             type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/companies/{id}:
+    get:
+      tags:
+        - Compagnies
+      summary: Company [id]
       responses:
         '200':
           description: Successful response
@@ -60,13 +71,19 @@ paths:
             schema:
               type: object
               example:
-                company_name: Corsica Ferry
+                company_name: Corsica Ferryzzzzz
       parameters:
         - name: x-csrf-token
           in: header
           schema:
             type: string
           example: d2ccbbca5f64f048e1018f54b8c3fde78c7ba9cceb9b61255bd54b25337fcb3d
+        - name: Cookie
+          in: header
+          schema:
+            type: string
+          example: >-
+            next-auth.session-token=20c028b3b493cf99b70ce2f3ad8b8dc136654386d4d1778a3a612923ff73e61a%7C461215622ebd7c0d6deb6031989d715136be0565618d52a7c09d86708504d95f
       responses:
         '200':
           description: Successful response
@@ -85,6 +102,77 @@ paths:
       tags:
         - Compagnies
       summary: Company update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_company: 672e1cda44be5d77da347d67
+                company_name: Air Saturn
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/booking:
+    get:
+      tags:
+        - Booking
+      summary: Booking
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Booking
+      summary: Booking create
+      description: |-
+        ### Add Company
+
+        This endpoint allows the client to add a new company to the database.
+
+        #### Request Body
+
+        - `company_name`: (string) The name of the company to be added.
+            
+
+        #### Response
+
+        The response will contain the status of the request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                company_name: Corsica Ferry
+      parameters:
+        - name: x-csrf-token
+          in: header
+          schema:
+            type: string
+          example: d2ccbbca5f64f048e1018f54b8c3fde78c7ba9cceb9b61255bd54b25337fcb3d
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Booking
+      summary: Booking delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Booking
+      summary: Booking update
       requestBody:
         content:
           application/json:

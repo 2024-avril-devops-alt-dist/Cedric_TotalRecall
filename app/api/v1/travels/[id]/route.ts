@@ -3,20 +3,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../../utils/connectDB";
- 
-const prisma = new PrismaClient();
+import { protectRoute } from "@/lib/auth"; 
 
-  /* ############ Collection variable ############# */
+const prisma = new PrismaClient();
+   /* TO PROTECT ROUTE ADD
+  const token = await protectRoute(req);
+  if (token instanceof Response) { return token;  }
+  */
+ 
+/* ######## Collection variable ########## */
   const collection = "travel"; 
   const response = "travels";
   const id_collection = "id_travel"
   
-/*-------------------------- GET ---------------------------------*/
-
-/*---------GET by ID-----------*/
+/*-------------------------- GET by ID---------------------------------*/
 export async function GET(req: NextRequest) {
   const id = req.nextUrl.pathname.split("/").pop();
-  console.log("*---------GET ALL-----------*/ ",id)
+  console.log("*---------GET by ID-----------*/ ",id)
 
   try {
     const data = await prisma[collection].findUnique({
