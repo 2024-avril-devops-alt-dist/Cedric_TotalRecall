@@ -17,12 +17,7 @@ const prisma = new PrismaClient();
   const id_collection = "id_company"
 
 /*-------------------------- GET ---------------------------------*/
-
 export async function GET(req: NextRequest) {
-  const dbCheck = checkDatabase();
-
-  if (dbCheck) return dbCheck;
-
   try {
     const data = await prisma[collection].findMany();
     return NextResponse.json({ [response]: data ?? [] });

@@ -16,40 +16,20 @@ const prisma = new PrismaClient();
   const response = "flights";
   const id_collection = "id_flight"
   
-
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {
-  const id = req.nextUrl.pathname.split("/").pop();
-  if (id && id !== response) return GETByID(req);
-
-  const dbCheck = checkDatabase();
-  if (dbCheck) return dbCheck;
-
   try {
-    const data = await prisma[collection].findMany();
-    return NextResponse.json({ [response]: data ?? [] });
-  } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to fetch ${collection}` },
-      { status: 500 }
-    );
-  }
-}
-
-/*-------------------------- GET by ID ---------------------------------*/
-async function GETByID(req: NextRequest) {
-  const id = req.nextUrl.pathname.split("/").pop();
-  const dbCheck = checkDatabase();
-  if (dbCheck) return dbCheck;
-
-  try {
-    const data = await prisma[collection].findUnique({
-      where: { [id_collection]: id },
+    const data = await prisma[collection].findMany({
+      include: {
+        departure_station: true,
+        arrival_station: true,
+      },
     });
     return NextResponse.json({ [response]: data ?? [] });
   } catch (error) {
+    console.error("Error fetching flights:", error);
     return NextResponse.json(
-      { error: `Failed to fetch ${collection}` },
+      { error: `Failed to create ${collection}` },
       { status: 500 }
     );
   }

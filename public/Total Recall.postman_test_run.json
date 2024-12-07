@@ -1,22 +1,22 @@
 {
-	"id": "af7daa30-735e-4136-9036-991c1d8dbbf5",
+	"id": "09333370-ae0d-4a3c-8a83-909afd5ea538",
 	"name": "Total Recall",
-	"timestamp": "2024-12-06T14:19:24.188Z",
+	"timestamp": "2024-12-07T15:08:37.298Z",
 	"collection_id": "21701280-a419fb83-fcd9-4313-b499-06977466df7d",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 40,
+	"totalPass": 42,
 	"delay": 0,
 	"persist": true,
 	"status": "finished",
-	"startedAt": "2024-12-06T14:19:19.963Z",
-	"totalFail": 5,
+	"startedAt": "2024-12-07T15:08:18.971Z",
+	"totalFail": 3,
 	"results": [
 		{
 			"id": "4f1d52e8-24f3-4f1e-802d-775612b2e45b",
 			"name": "Auth user",
 			"url": "http://localhost:3000/api/v1/auth/signin",
-			"time": 84,
+			"time": 1297,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -24,7 +24,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				84
+				1297
 			],
 			"allTests": [
 				{}
@@ -33,8 +33,8 @@
 		{
 			"id": "702d5748-bcb0-45b5-aa2c-82ca8dc0ba7b",
 			"name": "Company {id}",
-			"url": "http://localhost:3000/api/v1/companies/674eb400d9dddfb96a4135ab",
-			"time": 81,
+			"url": "http://localhost:3000/api/v1/companies/675460eaf9a4e64018a19484",
+			"time": 88,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -69,7 +69,7 @@
 				}
 			},
 			"times": [
-				81
+				88
 			],
 			"allTests": [
 				{
@@ -85,7 +85,7 @@
 			"id": "135ae654-42c3-46ba-852e-8d9b03959554",
 			"name": "Company",
 			"url": "http://localhost:3000/api/v1/companies",
-			"time": 57,
+			"time": 290,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -120,7 +120,7 @@
 				}
 			},
 			"times": [
-				57
+				290
 			],
 			"allTests": [
 				{
@@ -136,7 +136,7 @@
 			"id": "cd6d1392-eb3c-4d0e-ac8a-f3d641acd8b8",
 			"name": "Company create",
 			"url": "http://localhost:3000/api/v1/companies",
-			"time": 52,
+			"time": 49,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -171,7 +171,7 @@
 				}
 			},
 			"times": [
-				52
+				49
 			],
 			"allTests": [
 				{
@@ -184,28 +184,28 @@
 			]
 		},
 		{
-			"id": "9690b611-5d03-414d-a74b-e89c3c3c6902",
-			"name": "Company delete",
+			"id": "406894fc-6182-403f-84c8-3fa9545eee78",
+			"name": "Company update",
 			"url": "http://localhost:3000/api/v1/companies",
-			"time": 55,
+			"time": 49,
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				55
+				49
 			],
 			"allTests": [
 				{}
 			]
 		},
 		{
-			"id": "406894fc-6182-403f-84c8-3fa9545eee78",
-			"name": "Company update",
+			"id": "9690b611-5d03-414d-a74b-e89c3c3c6902",
+			"name": "Company delete",
 			"url": "http://localhost:3000/api/v1/companies",
-			"time": 43,
+			"time": 52,
 			"responseCode": {
 				"code": 500,
 				"name": "Internal Server Error"
@@ -213,7 +213,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				43
+				52
 			],
 			"allTests": [
 				{}
@@ -223,7 +223,7 @@
 			"id": "5089bde5-ef10-4d39-bc2e-46857c4d4112",
 			"name": "Booking",
 			"url": "http://localhost:3000/api/v1/booking",
-			"time": 67,
+			"time": 295,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -258,7 +258,7 @@
 				}
 			},
 			"times": [
-				67
+				295
 			],
 			"allTests": [
 				{
@@ -274,7 +274,7 @@
 			"id": "f87379a9-f0ae-440a-999c-122f54ab9307",
 			"name": "Booking {id}",
 			"url": "http://localhost:3000/api/v1/booking/{id}",
-			"time": 82,
+			"time": 2124,
 			"responseCode": {
 				"code": 500,
 				"name": "Internal Server Error"
@@ -282,7 +282,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				82
+				2124
 			],
 			"allTests": [
 				{}
@@ -310,7 +310,7 @@
 			"id": "2939abe4-866e-4957-b399-1a11224ec40a",
 			"name": "Booking delete",
 			"url": "http://localhost:3000/api/v1/booking",
-			"time": 48,
+			"time": 33,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -318,7 +318,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				48
+				33
 			],
 			"allTests": [
 				{}
@@ -328,7 +328,7 @@
 			"id": "dee00fc5-2699-4b52-a307-4a9de1021a32",
 			"name": "Booking update",
 			"url": "http://localhost:3000/api/v1/booking",
-			"time": 49,
+			"time": 62,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -336,7 +336,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				49
+				62
 			],
 			"allTests": [
 				{}
@@ -346,58 +346,76 @@
 			"id": "7562330e-f563-4df7-8a1f-a3cb62a3db5a",
 			"name": "Flights",
 			"url": "http://localhost:3000/api/v1/flights",
-			"time": 53,
+			"time": 338,
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {
-				"Response status code is 200": false,
+				"Response status code is 200": true,
 				"Response has the required Content-Type header set to application/json": true,
-				"Flights array is present in the response": false,
+				"Flights array is present in the response": true,
 				"Flights array should be empty": false,
-				"Response time is less than 200ms": true
+				"Response time is less than 200ms": false
 			},
 			"testPassFailCounts": {
 				"Response status code is 200": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				},
 				"Response has the required Content-Type header set to application/json": {
 					"pass": 1,
 					"fail": 0
 				},
 				"Flights array is present in the response": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				},
 				"Flights array should be empty": {
 					"pass": 0,
 					"fail": 1
 				},
 				"Response time is less than 200ms": {
-					"pass": 1,
-					"fail": 0
+					"pass": 0,
+					"fail": 1
 				}
 			},
 			"times": [
-				53
+				338
 			],
 			"allTests": [
 				{
-					"Response status code is 200": false,
+					"Response status code is 200": true,
 					"Response has the required Content-Type header set to application/json": true,
-					"Flights array is present in the response": false,
+					"Flights array is present in the response": true,
 					"Flights array should be empty": false,
-					"Response time is less than 200ms": true
+					"Response time is less than 200ms": false
 				}
 			]
 		},
 		{
 			"id": "9163618b-8a1b-4679-83dd-203f12f05f4e",
 			"name": "Flights {id}",
-			"url": "http://localhost:3000/api/v1/flights/{id}",
-			"time": 85,
+			"url": "http://localhost:3000/api/v1/flights/67545fa4f9a4e64018a19474",
+			"time": 2540,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2540
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "63016745-834e-42d9-bca8-b0de14b02d57",
+			"name": "Add  flights",
+			"url": "http://localhost:3000/api/v1/flights",
+			"time": 50,
 			"responseCode": {
 				"code": 500,
 				"name": "Internal Server Error"
@@ -405,7 +423,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				85
+				50
 			],
 			"allTests": [
 				{}
@@ -415,7 +433,7 @@
 			"id": "2143a65d-9a2d-4cd5-adf3-5df69542e91e",
 			"name": "Flight update",
 			"url": "http://localhost:3000/api/v1/flights",
-			"time": 53,
+			"time": 121,
 			"responseCode": {
 				"code": 500,
 				"name": "Internal Server Error"
@@ -423,7 +441,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				53
+				121
 			],
 			"allTests": [
 				{}
@@ -433,7 +451,7 @@
 			"id": "6ab61b63-0441-4bfa-93fb-43b0b9071667",
 			"name": "Flight delete",
 			"url": "http://localhost:3000/api/v1/flights",
-			"time": 55,
+			"time": 47,
 			"responseCode": {
 				"code": 500,
 				"name": "Internal Server Error"
@@ -441,7 +459,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				55
+				47
 			],
 			"allTests": [
 				{}
@@ -451,7 +469,7 @@
 			"id": "4b3f7d8c-1207-4ee6-a9e6-87f216bd1d21",
 			"name": "Stations",
 			"url": "http://localhost:3000/api/v1/stations",
-			"time": 51,
+			"time": 510,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -486,7 +504,7 @@
 				}
 			},
 			"times": [
-				51
+				510
 			],
 			"allTests": [
 				{
@@ -501,16 +519,16 @@
 		{
 			"id": "44c5ae30-526d-4b68-92a9-d2061446161c",
 			"name": "Stations {id}",
-			"url": "http://localhost:3000/api/v1/stations/{id}",
-			"time": 64,
+			"url": "http://localhost:3000/api/v1/stations/67545f70f9a4e64018a1946e",
+			"time": 2261,
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				64
+				2261
 			],
 			"allTests": [
 				{}
@@ -571,7 +589,7 @@
 			"id": "9a13a89d-2df3-4779-9643-3afc71975974",
 			"name": "Stations update",
 			"url": "http://localhost:3000/api/v1/stations",
-			"time": 55,
+			"time": 48,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -606,7 +624,7 @@
 				}
 			},
 			"times": [
-				55
+				48
 			],
 			"allTests": [
 				{
@@ -622,6 +640,78 @@
 			"id": "2831cdf8-c9af-425d-841b-dd6e477b7215",
 			"name": "Stations delete",
 			"url": "http://localhost:3000/api/v1/stations",
+			"time": 40,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				40
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4d911862-ef13-42e9-8505-ae1e563384e9",
+			"name": "Travels",
+			"url": "http://localhost:3000/api/v1/travels",
+			"time": 368,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				368
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c1233e72-b39e-4940-b420-c44e3d684a95",
+			"name": "Travel {id}",
+			"url": "http://localhost:3000/api/v1/travels/6754601bf9a4e64018a19478",
+			"time": 2175,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				2175
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ae8c11a6-62d4-4e27-ab00-b950bda40a2b",
+			"name": "Add travel with flights",
+			"url": "http://localhost:3000/api/v1/travels",
+			"time": 51,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				51
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e26661e2-a519-455a-8beb-cb96e447cbaf",
+			"name": "Travel update",
+			"url": "http://localhost:3000/api/v1/travels",
 			"time": 41,
 			"responseCode": {
 				"code": 500,
@@ -637,8 +727,8 @@
 			]
 		},
 		{
-			"id": "4d911862-ef13-42e9-8505-ae1e563384e9",
-			"name": "Travels",
+			"id": "43b48b15-c4f8-4364-88e8-f04c839e62fa",
+			"name": "Travel delete",
 			"url": "http://localhost:3000/api/v1/travels",
 			"time": 47,
 			"responseCode": {
@@ -655,82 +745,10 @@
 			]
 		},
 		{
-			"id": "c1233e72-b39e-4940-b420-c44e3d684a95",
-			"name": "Travel {id}",
-			"url": "http://localhost:3000/api/v1/travels/674ff1fad145d98354547166",
-			"time": 70,
-			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				70
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "ae8c11a6-62d4-4e27-ab00-b950bda40a2b",
-			"name": "Add travel with flights",
-			"url": "http://localhost:3000/api/v1/travels",
-			"time": 115,
-			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				115
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "e26661e2-a519-455a-8beb-cb96e447cbaf",
-			"name": "Travel update",
-			"url": "http://localhost:3000/api/v1/travels",
-			"time": 40,
-			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				40
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
-			"id": "43b48b15-c4f8-4364-88e8-f04c839e62fa",
-			"name": "Travel delete",
-			"url": "http://localhost:3000/api/v1/travels",
-			"time": 52,
-			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
-			},
-			"tests": {},
-			"testPassFailCounts": {},
-			"times": [
-				52
-			],
-			"allTests": [
-				{}
-			]
-		},
-		{
 			"id": "0adf2df7-a92b-41fd-a584-928147cf83b6",
 			"name": "Users",
 			"url": "http://localhost:3000/api/v1/users",
-			"time": 41,
+			"time": 450,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -739,7 +757,7 @@
 				"Response status code is 200": true,
 				"Content-Type header is application/json": true,
 				"Users array in the response should exist and be an array": true,
-				"Email is in a valid format": false,
+				"Email is in a valid format": true,
 				"Id_user, phone, role, email, createdAt, and updatedAt fields are present": false
 			},
 			"testPassFailCounts": {
@@ -756,8 +774,8 @@
 					"fail": 0
 				},
 				"Email is in a valid format": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				},
 				"Id_user, phone, role, email, createdAt, and updatedAt fields are present": {
 					"pass": 0,
@@ -765,14 +783,14 @@
 				}
 			},
 			"times": [
-				41
+				450
 			],
 			"allTests": [
 				{
 					"Response status code is 200": true,
 					"Content-Type header is application/json": true,
 					"Users array in the response should exist and be an array": true,
-					"Email is in a valid format": false,
+					"Email is in a valid format": true,
 					"Id_user, phone, role, email, createdAt, and updatedAt fields are present": false
 				}
 			]
@@ -780,16 +798,16 @@
 		{
 			"id": "0e1a4772-4565-4241-8629-a962868a67c1",
 			"name": "Users {id}",
-			"url": "http://localhost:3000/api/v1/users/{id}",
-			"time": 56,
+			"url": "http://localhost:3000/api/v1/users/675463be8010f64a617ec287",
+			"time": 2230,
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				56
+				2230
 			],
 			"allTests": [
 				{}
@@ -799,7 +817,7 @@
 			"id": "daf93b9d-b90c-4079-98fc-d57473505ac3",
 			"name": "User create",
 			"url": "http://localhost:3000/api/v1/users",
-			"time": 41,
+			"time": 54,
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request"
@@ -807,7 +825,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				41
+				54
 			],
 			"allTests": [
 				{}
@@ -815,7 +833,7 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 1629,
+	"totalTime": 15802,
 	"collection": {
 		"requests": [
 			{
@@ -835,12 +853,12 @@
 				"method": "POST"
 			},
 			{
-				"id": "9690b611-5d03-414d-a74b-e89c3c3c6902",
-				"method": "DELETE"
-			},
-			{
 				"id": "406894fc-6182-403f-84c8-3fa9545eee78",
 				"method": "PUT"
+			},
+			{
+				"id": "9690b611-5d03-414d-a74b-e89c3c3c6902",
+				"method": "DELETE"
 			},
 			{
 				"id": "5089bde5-ef10-4d39-bc2e-46857c4d4112",
@@ -869,6 +887,10 @@
 			{
 				"id": "9163618b-8a1b-4679-83dd-203f12f05f4e",
 				"method": "GET"
+			},
+			{
+				"id": "63016745-834e-42d9-bca8-b0de14b02d57",
+				"method": "POST"
 			},
 			{
 				"id": "2143a65d-9a2d-4cd5-adf3-5df69542e91e",

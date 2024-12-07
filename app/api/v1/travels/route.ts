@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
   if (dbCheck) return dbCheck;
 
   try {
+    console.log("-------------dans try ----------",collection)
     const data = await prisma[collection].findMany({
       include: {
         flights: {

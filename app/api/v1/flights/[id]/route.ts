@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
   if (dbCheck) return dbCheck;
 
   try {
+    console.log("-------------dans try ----------",id)
     const data = await prisma[collection].findUnique({
       where: { [id_collection]: id }
     });
