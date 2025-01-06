@@ -23,7 +23,7 @@ AUTH_URL='http://localhost:3000/api/auth'
 ```
 * Run docker compose up --build -d
 * Configure Mongo container :
-    * Go to the mongo container : ```docker exec -it mongo mongosh```
+    * Go to the mongo container : ```docker exec -it mongo mongo sh```
     * ```rs.initiate()```
     * To configure the host : ```rs.reconfig({ _id: 'rs0', members: [ { _id: 0, host: 'mongo:27017' }] }, { force: true });```
     * To show the config ```rs.status()```
@@ -32,7 +32,7 @@ AUTH_URL='http://localhost:3000/api/auth'
 
 ### Commands to test MongoDB database
 ```
-docker exec -it mongo mongosh
+docker exec -it mongo mongo sh
 
 rs.initiate()
 rs.reconfig({ _id: 'rs0', members: [ { _id: 0, host: 'mongo:27017' }] }, { force: true });
@@ -43,7 +43,19 @@ show collections
 db.<collections>.find().pretty()
 ```
 
-### Edit your 
+### Commands to configure Prisma
+Enter in app container
+```
+docker exec -it nextjs sh
+```
+Push db schema : 
+```
+npx prisma db push
+```
+Generate prisma client : 
+```
+npx prisma generate
+```
 
 ## Run the project
 
