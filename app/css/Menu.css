@@ -1,0 +1,45 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(216, 27, 27, 0.5);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 60px;
+  }
+  
+  .menu .icon {
+    margin-left:10px;
+    font-size:1.5em;
+  }
+  
+  .menu-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .menu-link {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    text-transform:uppercase;
+  }
+  
+  .menu-link:hover {
+    color: #ff6f61; /* Couleur de survol */
+  }
+  
+  @media (max-width: 768px) {
+    .menu-links {
+      display: none;
+    }
+  }
