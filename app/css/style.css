@@ -40,7 +40,7 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: 2;
   }
-  
+  /*----------- HOME ---------------*/
   .content {
     display: flex;
     flex-direction: column;
@@ -54,7 +54,6 @@ body {
     overflow-y: auto; 
     padding: 20px; 
   }
-  
   
   .title-section {
     background: rgba(0, 0, 0, 0.7);
@@ -70,8 +69,6 @@ body {
     margin-bottom: 10px;
   }
   
-
-  
   .subtitle {
     font-size: 24px;
     margin-bottom: 20px;
@@ -86,7 +83,32 @@ body {
     cursor: pointer;
     font-size: 18px;
   }
-
+  /*-----------------FLIGHTS----------------*/
+  
+  .box {
+    margin-top : 100px;
+    background: rgba(256, 256, 256, 0.7);
+    color: var(--theme);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+  }
+  .travel {
+    border : solid 1px  #fadddd;
+    background-color: #ebe4e4;
+    color: var(--theme);
+    padding: 5px;
+    margin: 10px 0;
+  }
+  .flight {
+    border : solid 1px var(--theme);
+    background-color: #fff;
+    color: var(--theme);
+    padding: 5px;
+  }
   /*------------------- LOGIN ----------------*/
   
 .login-container {
@@ -163,3 +185,10 @@ body {
     text-decoration: underline;
   }
   
+
+  @media (max-width: 768px) {
+    .box {
+      max-width: 800px;
+    }
+
+  }
