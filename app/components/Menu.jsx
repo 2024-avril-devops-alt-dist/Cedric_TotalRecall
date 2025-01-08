@@ -1,6 +1,7 @@
 // components/Menu.js
 "use client";
 import React, { useState }  from 'react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import '../css/Menu.css';
@@ -9,7 +10,7 @@ import { FaRocket, FaBars } from "react-icons/fa";
 const Menu = () => {
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-      console.log("------",pathname)
+    const { data: session } = useSession();
   
     const isActive = (path) => {
         return pathname === path ? 'active' : '';
@@ -29,7 +30,11 @@ const Menu = () => {
         <Link href="/Reservation" className={`menu-link ${isActive('/Reservation')}`}>Reservations</Link>
         <Link href="/"  className={`menu-link ${isActive('/')}`}>Space Travel <FaRocket className="icon" /></Link>
         <Link href="/Contact" className={`menu-link ${isActive('/Contact')}`}>Contact</Link>
-        <Link href="/Login" className={`menu-link ${isActive('/Login')}`}>Profile</Link>
+        {session ? (
+                    <Link href="/Profile" className={`menu-link ${isActive('/Profile')}`}>Profile</Link>
+                ) : (
+                    <Link href="/Login" className={`menu-link ${isActive('/Login')}`}>Login</Link>
+                )}
       </nav>
     </div>
   );
