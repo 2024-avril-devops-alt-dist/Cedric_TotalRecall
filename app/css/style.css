@@ -1,14 +1,24 @@
 /* app/style.css */
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family: 'Segoe UI', Arial ;
   }
   
-.container {
-    position: relative;
+:root {
+    --white : #fff;
+    --black : #000;
+    --theme : #61120b;
+    --titre : #9D9D9D;
+    --texte : #fff;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    position: relative;
   }
   
   .background {
@@ -31,19 +41,27 @@ body {
   }
   
   .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    color: white;
-    z-index: 10;
+    color: var(--texte);
+    z-index: 3;
+    position: relative;
+    flex: 1;
+    overflow-y: auto; 
+    padding: 20px; 
   }
   
-  .titleSection {
+  
+  .title-section {
     background: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .title {
@@ -51,34 +69,94 @@ body {
     margin-bottom: 10px;
   }
   
-  .badge {
-    display: inline-block;
-    background: red;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    margin-bottom: 10px;
-  }
+
   
   .subtitle {
     font-size: 24px;
     margin-bottom: 20px;
   }
-  
-  .distance {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: gray;
-  }
-  
+    
   .button {
-    background: #0070f3;
-    color: white;
+    background:  rgba(216, 27, 27, 0.5);
+    color: var(--texte);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
+  }
+
+  /*------------------- LOGIN ----------------*/
+  
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .login-box {
+    background: var(--texte);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--theme);
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .login-button {
+    background-color: var(--theme);
+    color: var(--texte);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: var(--theme);
+  }
+  
+  .forgot-password {
+    margin-top: 20px;
+    color: var(--theme);
+    cursor: pointer;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
   }
   
