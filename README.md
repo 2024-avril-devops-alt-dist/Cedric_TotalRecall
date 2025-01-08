@@ -57,6 +57,16 @@ Generate prisma client :
 npx prisma generate
 ```
 
+### Generate the db with seed.js
+Enter in app container
+```
+docker exec -it nextjs sh
+```
+Generate the data : 
+```
+npx prisma db seed
+```
+
 ## Run the project
 
 ```
