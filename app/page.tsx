@@ -1,5 +1,6 @@
 // app/page.js
 import React from 'react';
+import { SessionProvider } from 'next-auth/react';
 import Image from 'next/image';
 import Menu from './components/Menu';
 import './css/style.css';
