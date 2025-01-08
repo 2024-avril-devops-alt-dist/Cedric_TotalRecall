@@ -9,7 +9,6 @@ import { signInSchema } from "./lib/zod"
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
  
-console.log('------------ Dans auth.js ------------- ');
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -19,14 +18,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        console.log("AuthJS : ", credentials);
         try {
           const user = await db.user.findUnique({
             where: { email: credentials?.email as string },
           });
       
           if (user && (await bcrypt.compare(credentials.password, user.password))) {
-            return { id: user.id_user, email: user.email };
+            return { id: user.id_user, email: user.email, role: user.role, name: user.name };
           }
       
           throw new Error("Invalid credentials");

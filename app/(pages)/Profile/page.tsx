@@ -35,6 +35,7 @@ const Profile = () => {
             <button onClick={handleSignOut} className="logout-button">
               Se déconnecter
             </button>
+            <p>Ton rôle est : {session.user?.role} (ne fonctionne pas à rechecker)</p>
           </div>
         </div>
       </div>
