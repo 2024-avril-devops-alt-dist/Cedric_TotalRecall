@@ -5,6 +5,7 @@ services:
     container_name: nextjs
     working_dir: /app
     volumes:
+      - /mnt/c/---CODE---/SIMPLON_2024/total_recall:/app
       - ./:/app
       #- /app/node_modules
     build:
@@ -14,8 +15,9 @@ services:
       - "5555:5555"
       - "3000:3000"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - NODE_ENV=development
+      - WDS_SOCKET_HOST=127.0.0.1 
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true 
     depends_on:
       - mongo
     command: ["sh", "-c", "npx next dev & npx prisma studio", "npx prisma generate", "npm run dev"]
