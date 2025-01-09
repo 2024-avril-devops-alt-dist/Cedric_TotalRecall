@@ -2,7 +2,6 @@
 "use client";
 import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import Image from "next/image";
 import Menu from "../../components/Menu";
 import "../../css/style.css";
 
