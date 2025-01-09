@@ -31,7 +31,7 @@ const Menu = ({background}) => {
         <Link href="/Flight" className={`menu-link ${isActive('/Flight')}`}>Destinations</Link>
         <Link href="/Reservation" className={`menu-link ${isActive('/Reservation')}`}>Reservations</Link>
         <Link href="/"  className={`menu-link ${isActive('/')}`}>Space Travel <FaRocket className="icon" /></Link>
-        <Link href="/Contact" className={`menu-link ${isActive('/Contact')}`}>Contact</Link>
+        <Link href="/Contact" className={`menu-link ${isActive('/Contact')}`}>Compagnies</Link>
         {session ? (
                     <Link href="/Profile" className={`menu-link ${isActive('/Profile')}`}>Profile</Link>
                 ) : (
@@ -42,9 +42,9 @@ const Menu = ({background}) => {
       <div className="background">
         <Image 
           src={`/Images/${background}`} 
-          layout="fill" 
-          objectFit="cover" 
-          alt="Mars" 
+          fill
+          style={{ objectFit: 'cover' }}
+          alt="Image de fond d'écran" 
           />
       </div>
     </>

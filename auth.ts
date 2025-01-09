@@ -1,3 +1,4 @@
+
 // auth.ts
 
 import NextAuth from "next-auth"
@@ -9,6 +10,9 @@ import { signInSchema } from "./lib/zod"
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
  
+
+
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -17,7 +21,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials : any) => {
         try {
           const user = await db.user.findUnique({
             where: { email: credentials?.email as string },
@@ -36,11 +40,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }),
     ],
     callbacks: {
-      jwt({ token, user }) {
-        if(user) token.role = user.role
+      jwt({ token, user }: {token : any ; user : any}) {
+        if(user) token.role = user.role as string
         return token
       },
-      session({ session, token }) {
+      session({ session, token } : {session : any ; token : any}) {
         session.user.role = token.role
         return session
       }

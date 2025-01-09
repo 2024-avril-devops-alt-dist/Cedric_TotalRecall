@@ -18,8 +18,8 @@ const prisma = new PrismaClient();
 
 /*-------------------------- GET ---------------------------------*/
 export async function GET(req: NextRequest) {
-  const token = await protectRoute(req);
-  if (token instanceof Response) { return token;  }
+//  const token = await protectRoute(req);
+//  if (token instanceof Response) { return token;  }
   try {
     const data = await prisma[collection].findMany();
     return NextResponse.json({ [response]: data ?? [] });
