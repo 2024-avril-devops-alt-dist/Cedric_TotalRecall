@@ -1,13 +1,14 @@
 // components/Menu.js
 "use client";
 import React, { useState }  from 'react';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import '../css/Menu.css';
 import { FaRocket, FaBars } from "react-icons/fa";
 
-const Menu = () => {
+const Menu = ({background}) => {
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { data: session } = useSession();
@@ -21,6 +22,7 @@ const Menu = () => {
   };
 
   return (
+    <>
     <div className="menu">
     <button className="menu-burger" onClick={toggleMenu}>
       <FaBars />
@@ -37,6 +39,15 @@ const Menu = () => {
                 )}
       </nav>
     </div>
+      <div className="background">
+        <Image 
+          src={`/Images/${background}`} 
+          layout="fill" 
+          objectFit="cover" 
+          alt="Mars" 
+          />
+      </div>
+    </>
   );
 };
 

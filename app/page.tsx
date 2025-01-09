@@ -1,18 +1,13 @@
 // app/page.js
 import React from 'react';
-import { SessionProvider } from 'next-auth/react';
-import Image from 'next/image';
 import Menu from './components/Menu';
 import './css/style.css';
 
 const HomePage = () => {
   return (
     <div className="container">
-      <div className="background">
-        <Image src="/Images/mars3.jpg" layout="fill" objectFit="cover" alt="Mars" />
-      </div>
+      <Menu background="mars3.jpg"/>
       <div className="overlay"></div>
-      <Menu />
       <div className="content">
         <div className="title-section">
           <h1 className="title">A new dawn, Mars</h1>

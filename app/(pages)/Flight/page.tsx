@@ -1,12 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import Image from "next/image";
 import Menu from '../../components/Menu';
 import '../../css/style.css';
 
 const Flight = () => {
   const [travels, setTravels] = useState([]);
-  console.log("-----", travels)
   
   useEffect(() => {
     async function fetchTravels() {
@@ -28,10 +26,7 @@ const Flight = () => {
     }
   return (
     <div className="container">
-      <Menu />
-      <div className="background">
-        <Image src="/Images/venus.jpg" layout="fill" objectFit="cover" alt="Mars" />
-      </div>
+      <Menu background="venus.jpg"/>
       <div className="content">
         <div className="box">
         <h1>Voyages intergalactique ({travels.length})</h1>

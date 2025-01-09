@@ -26,15 +26,7 @@ const Login = () => {
   };
   return (
     <div className="container">
-      <Menu />
-      <div className="background">
-        <Image
-          src="/Images/saturn.jpg"
-          layout="fill"
-          objectFit="cover"
-          alt="Mars"
-        />
-      </div>
+      <Menu background="saturn.jpg"/>
       <div className="content">
         <div className="login-container">
           <div className="login-box">
