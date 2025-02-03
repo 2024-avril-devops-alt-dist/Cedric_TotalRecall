@@ -1,7 +1,6 @@
 // app/layout.tsx
 
 import { SessionProvider } from 'next-auth/react';
-import { QueryClientProvider } from '@tanstack/react-query';
 import {TanstackProvider}   from '../lib/queryClient'
 
 export const metadata = {
