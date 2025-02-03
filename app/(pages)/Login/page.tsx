@@ -2,8 +2,8 @@
 "use client";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
-import Image from "next/image";
 import Menu from "../../components/Menu";
+import { Input, Button } from "../../components/Form";
 import "../../css/style.css";
 
 const Login = () => {
@@ -24,39 +24,44 @@ const Login = () => {
       window.location.href = "/";
     }
   };
+
   return (
     <div className="container">
-      <Menu background="saturn.jpg"/>
+      <Menu background="saturn.jpg" />
       <div className="content">
         <div className="login-container">
           <div className="login-box">
-            <h1 className="login-title">Login</h1>
+            <h1 className="login-title">Se connecter</h1>
             <form className="login-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <button type="submit" className="login-button">
-                Se connecter
-              </button>
+              <Input
+                className="form-control"
+                type="email"
+                id="email"
+                name="email"
+                label="Email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeHolder="Votre email"
+              />
+              <Input
+                className="form-control"
+                type="password"
+                id="password"
+                name="password"
+                label="Mot de passe"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeHolder="Votre mot de passe"
+              />
+
+              <Button 
+                className="login-button"
+                type="submit" 
+                title="Se connecter"
+              />
+                
             </form>
             <p className="forgot-password">Mot de passe oublié ?</p>
           </div>

@@ -1,8 +1,8 @@
 // pages/Flight.js
 import React from "react";
 import Image from "next/image";
-import Menu from "../../components/Menu";
-import "../../css/style.css";
+import Menu from "../../../components/Menu";
+import "../../../css/style.css";
 
 const Reservation = () => {
   return (
