@@ -13,10 +13,10 @@ const Companies = () => {
   const route = "companies";
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_VERSION}/${route}`;
   const queryKey = [route];
-  const { isPending, error, data, isFetching } = useFetchData(url, queryKey);
+  const { isPending, error, data } = useFetchData(url, queryKey);
   if (isPending) return "Chargement...";
   if (error) return "An error has occurred: " + error.message;
-
+console.log('---------------',url)
   const filtered = data.companies.filter((company: Company) =>
     company.company_name.toLowerCase().includes(search.toLowerCase())
   );
