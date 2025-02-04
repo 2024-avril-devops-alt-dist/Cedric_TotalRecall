@@ -83,24 +83,19 @@ const Flight = () => {
                       ).format("DD/MM/YYYY HH:mm");
 
                       return (
-                        <>
+                        <div key={flight.id_flight} className="flight">
                           <hr />
-                          <div key={flight.id_flight} className="flight">
+                          <div>
                             Départ le <b>{flightDepartureTime}</b> de la station{" "}
-                            <b>
-                              {flight.departure_station?.station_name ||
-                                "Unknown"}
-                            </b>{" "}
+                            <b>{flight.departure_station?.station_name || "Unknown"}</b>{" "}
                             <br />
                             Arrivée le <b>{flightArrivalTime}</b> sur{" "}
-                            <b>
-                              {flight.arrival_station?.station_name ||
-                                "Unknown"}
-                            </b>{" "}
+                            <b>{flight.arrival_station?.station_name || "Unknown"}</b>{" "}
                             <br />
                           </div>
-                        </>
+                        </div>
                       );
+                      
                     })}
 
                     <Link

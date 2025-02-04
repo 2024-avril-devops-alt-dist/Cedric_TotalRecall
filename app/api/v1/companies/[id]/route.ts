@@ -1,4 +1,4 @@
-// app/api/v?/compagnies/route.ts
+// app/api/v?/compagnies/[id]/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
@@ -32,4 +32,58 @@ export async function GET(req: NextRequest) {
   } catch (error) {
       return handleError(error, collection);
     }
+}
+
+/*-------------------------- UPDATE ---------------------------------*/
+export async function PUT(req: NextRequest) {
+  const id = req.nextUrl.pathname.split("/").pop();
+  const dbCheck = checkDatabase();
+
+  if (dbCheck) return dbCheck;
+
+  try {
+    const body = await req.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { error: `ID is required to update ${collection}` },
+        { status: 400 }
+      );
+    }
+
+    const updatedData = await prisma[collection].update({
+      where: { [id_collection]: id },
+      data: body,
+    });
+
+    return NextResponse.json({ [response]: updatedData });
+  } catch (error) {
+    return handleError(error, collection);
+  }
+}
+
+/*-------------------------- DELETE ---------------------------------*/
+export async function DELETE(req: NextRequest) {
+  console.log("Dans update")
+  const dbCheck = checkDatabase();
+  if (dbCheck) return dbCheck;
+
+  try {
+    const { [id_collection]: idValue } = await req.json();
+
+    if (!idValue) {
+      return NextResponse.json(
+        { error: `ID is required to delete ${collection}` },
+        { status: 400 }
+      );
+    }
+
+    const deletedData = await prisma[collection].delete({
+      where: { [id_collection]: idValue },
+    });
+
+    return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });
+  } catch (error) {
+    return handleError(error, collection);
+  }
 }

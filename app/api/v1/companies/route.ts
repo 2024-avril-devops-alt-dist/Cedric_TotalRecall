@@ -32,6 +32,7 @@ export async function GET() {
 /*-------------------------- POST ---------------------------------*/
 export async function POST(req: NextRequest) {
   const dbCheck = checkDatabase();
+  console.log()
   if (dbCheck) return dbCheck;
 
   try {
@@ -58,7 +59,6 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     console.log("Dans update",body )
     const { [id_collection]: idValue, ...dataToUpdate } = body;
-console.log("----------------------id_collection :", id_collection)
     if (!idValue) {
       return NextResponse.json(
         { error: `ID is required to update ${collection}` },
