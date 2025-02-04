@@ -3,7 +3,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../utils/connectDB";
-import { protectRoute } from "@/lib/auth"; 
+import { handleError } from "../../../utils/response"
+//import { protectRoute } from "@/lib/auth"; 
 
 const prisma = new PrismaClient();
    /* TO PROTECT ROUTE ADD
@@ -17,7 +18,7 @@ const prisma = new PrismaClient();
   const id_collection = "id_flight"
   
 /*-------------------------- GET ---------------------------------*/
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const data = await prisma[collection].findMany({
       include: {
@@ -48,11 +49,8 @@ export async function POST(req: NextRequest) {
     });
     return NextResponse.json({ [response]: newData });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to create ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
 
 /*-------------------------- UPDATE ---------------------------------*/
@@ -79,11 +77,8 @@ console.log("----------------------id_collection :", idValue)
 
     return NextResponse.json({ [response]: updatedData });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to update ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
 
 /*-------------------------- DELETE ---------------------------------*/
@@ -108,9 +103,6 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to delete ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }

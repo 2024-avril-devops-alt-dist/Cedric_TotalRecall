@@ -3,7 +3,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../utils/connectDB";
- 
+import { handleError } from "../../../utils/response"
+//import { protectRoute } from "@/lib/auth"; 
 const prisma = new PrismaClient();
  
   /* ############ Collection variable ############# */
@@ -12,7 +13,7 @@ const prisma = new PrismaClient();
   const id_collection = "id_travel"
   
 /*-------------------------- GET ---------------------------------*/
-export async function GET(req: NextRequest) {
+export async function GET() {
   const dbCheck = checkDatabase();
 
   if (dbCheck) return dbCheck;
@@ -34,11 +35,8 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json({ [response]: data ?? [] });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to fetch ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
 
 /*-------------------------- POST ---------------------------------*/
@@ -96,11 +94,8 @@ console.log("----------------------id_collection :", id_collection)
 
     return NextResponse.json({ [response]: updatedData });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to update ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
 
 /*-------------------------- DELETE ---------------------------------*/
@@ -133,9 +128,6 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to delete ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }

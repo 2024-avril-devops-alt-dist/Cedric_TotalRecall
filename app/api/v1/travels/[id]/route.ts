@@ -2,8 +2,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { checkDatabase } from "../../../../utils/connectDB";
-import { protectRoute } from "@/lib/auth"; 
+//import { checkDatabase } from "../../../../utils/connectDB";
+//import { handleError } from "../../../../utils/response"
+//import { protectRoute } from "@/lib/auth"; 
 
 const prisma = new PrismaClient();
    /* TO PROTECT ROUTE ADD
@@ -14,7 +15,7 @@ const prisma = new PrismaClient();
 /* ######## Collection variable ########## */
   const collection = "travel"; 
   const response = "travels";
-  const id_collection = "id_travel"
+  //const id_collection = "id_travel"
   
 /*-------------------------- GET by ID---------------------------------*/
 export async function GET(req: NextRequest) {

@@ -4,9 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../utils/connectDB";
 import { signInSchema } from "@/lib/zod";
-import { z } from "zod";
+//import { z } from "zod";
 import bcrypt from 'bcryptjs';
-import { protectRoute } from "@/lib/auth"; 
+import { handleError } from "../../../utils/response"
+//import { protectRoute } from "@/lib/auth"; 
 
 const prisma = new PrismaClient();
    /* TO PROTECT ROUTE ADD
@@ -17,10 +18,10 @@ const prisma = new PrismaClient();
 /* ######## Collection variable ########## */
   const collection = "user"; 
   const response = "users";
-  const id_collection = "id_user"
+  //const id_collection = "id_user"
 
 /*-------------------------- GET ---------------------------------*/
-export async function GET(req: NextRequest) {
+export async function GET() {
   const dbCheck = checkDatabase();
 
 
@@ -31,11 +32,8 @@ export async function GET(req: NextRequest) {
     console.log('------------users : ', data)
     return NextResponse.json({ [response]: data ?? [] });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to fetch ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
 
 /*-------------------------- POST ---------------------------------*/

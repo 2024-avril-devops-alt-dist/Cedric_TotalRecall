@@ -3,7 +3,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { checkDatabase } from "../../../../utils/connectDB";
-import { protectRoute } from "@/lib/auth"; 
+import { handleError } from "../../../../utils/response"
+//import { protectRoute } from "@/lib/auth"; 
 
 const prisma = new PrismaClient();
    /* TO PROTECT ROUTE ADD
@@ -29,9 +30,6 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json({ [response]: data ?? [] });
   } catch (error) {
-    return NextResponse.json(
-      { error: `Failed to fetch ${collection}` },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
