@@ -104,6 +104,7 @@ async function main() {
     data: {
       id_travel: '677e1be3c9a7d52bcd8b241a',
       status_travel: 'Active',
+      travel_name: 'Voyage Terre Lune',
       company: {
         connect: { id_company: companyAirTerre.id_company },
       },
@@ -142,6 +143,7 @@ async function main() {
     data: {
       id_travel: '677e1bfec9a7d52bcd8b2422',
       status_travel: 'Active',
+      travel_name: 'Voyage Terre Mars',
       company: {
         connect: { id_company: companyAirTitan.id_company },
       },

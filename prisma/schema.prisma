@@ -66,6 +66,7 @@ model Station {
 model Travel {
   id_travel      String       @id @default(auto()) @map("_id") @db.ObjectId
   status_travel  String
+  travel_name    String
   flights        Flight[] 
   reservations   Reservation[]
   company        Company?     @relation("CompanyTravels", fields: [company_id], references: [id_company])
