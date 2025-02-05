@@ -7,6 +7,7 @@ export interface Travels {
     flights: Flights[];
     flight: string;
     station_name: string;
+    travel_name: string;
   }
   
   export interface Flights {
