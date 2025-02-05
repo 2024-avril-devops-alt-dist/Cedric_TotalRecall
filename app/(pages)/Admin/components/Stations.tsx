@@ -10,7 +10,6 @@ const name_collection = "station_name"
 export const StationList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
-      <TextField source={id_collection} label="ID" />
       <TextField source={name_collection} label={label} />
     </Datagrid>
   </List>

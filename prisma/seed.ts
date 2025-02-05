@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Créer les utilisateurs
-  const user1 = await prisma.user.create({
+ /* const user1 = await prisma.user.create({
     data: {
       id_user: '677e1d51c9a7d52bcd8b2457',
       password: '123456',
@@ -40,7 +40,7 @@ async function main() {
       updatedAt: new Date('2025-01-08T06:40:06.303Z'),
     },
   });
-
+*/
   // Créer les stations
   const stationTerre = await prisma.station.create({
     data: {
@@ -100,7 +100,7 @@ async function main() {
   });
 
   // Créer les voyages et les vols
-  const travel1 = await prisma.travel.create({
+ /* const travel1 = await prisma.travel.create({
     data: {
       id_travel: '677e1be3c9a7d52bcd8b241a',
       status_travel: 'Active',
@@ -188,10 +188,10 @@ async function main() {
         ],
       },
     },
-  });
+  });*/
 
   // Créer les réservations
-  const reservation1 = await prisma.reservation.create({
+/*  const reservation1 = await prisma.reservation.create({
     data: {
       id_reservation: '677e1e50c9a7d52bcd8b2481',
       id_travel: travel2.id_travel,
@@ -200,7 +200,7 @@ async function main() {
       id_passenger: '',
       status_reservation: null,
     },
-  });
+  }); */
 
   // Créer les passagers
   const passenger1 = await prisma.passenger.create({

@@ -76,7 +76,6 @@ export async function PUT(req: NextRequest) {
 
   try {
     const body = await req.json();
-    console.log("Dans update",body )
     const { [id_collection]: idValue, ...dataToUpdate } = body;
 console.log("----------------------id_collection :", id_collection)
     if (!idValue) {
@@ -99,7 +98,6 @@ console.log("----------------------id_collection :", id_collection)
 
 /*-------------------------- DELETE ---------------------------------*/
 export async function DELETE(req: NextRequest) {
-  console.log("Dans update")
   const dbCheck = checkDatabase();
   if (dbCheck) return dbCheck;
 

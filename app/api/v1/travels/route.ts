@@ -41,33 +41,32 @@ export async function GET() {
 
 /*-------------------------- POST ---------------------------------*/
 export async function POST(req: NextRequest) {
+  const dbCheck = checkDatabase();
+  if (dbCheck) return dbCheck;
+
   try {
     const body = await req.json();
+    // Vérifie que body.id_flights est défini et est un tableau
+    const id_flights = Array.isArray(body.id_flight) ? body.id_flight : [];
 
-    const newTravel = await prisma.travel.create({
+    const newData = await prisma.travel.create({
       data: {
+        travel_name: body.travel_name,
         status_travel: body.status_travel,
-        company_id: body.company_id,
+        company: {
+          connect: { id_company: body.company_id },
+        },
         flights: {
-          create: body.flights.map((flight: any) => ({
-            departure_station: { connect: { id_station: flight.departure_station } },
-            arrival_station: { connect: { id_station: flight.arrival_station } },
-            departure_day_time: flight.departure_day_time,
-            arrival_day_time: flight.arrival_day_time,
-            seats: flight.seats,
-          })),
+          connect: id_flights.map((id: string) => ({ id_flight: id })),
         },
       },
     });
 
-    return NextResponse.json({ travel: newTravel });
+
+    return NextResponse.json({ [response]: newData });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: 'Failed to create Travel' },
-      { status: 500 }
-    );
-  }
+      return handleError(error, collection);
+    }
 }
 
 /*-------------------------- UPDATE ---------------------------------*/
@@ -98,7 +97,34 @@ console.log("----------------------id_collection :", id_collection)
     }
 }
 
+
 /*-------------------------- DELETE ---------------------------------*/
+export async function DELETE(req: NextRequest) {
+  console.log("Dans update")
+  const dbCheck = checkDatabase();
+  if (dbCheck) return dbCheck;
+
+  try {
+    const { [id_collection]: idValue } = await req.json();
+
+    if (!idValue) {
+      return NextResponse.json(
+        { error: `ID is required to delete ${collection}` },
+        { status: 400 }
+      );
+    }
+
+    const deletedData = await prisma[collection].delete({
+      where: { [id_collection]: idValue },
+    });
+
+    return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });
+  } catch (error) {
+      return handleError(error, collection);
+    }
+}
+/*-------------------------- DELETE ---------------------------------*/
+/* old version
 export async function DELETE(req: NextRequest) {
   console.log("Dans update")
   const dbCheck = checkDatabase();
@@ -129,5 +155,5 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: `${collection} deleted successfully`, [response]: deletedData });
   } catch (error) {
       return handleError(error, collection);
-    }
-}
+    } 
+}*/

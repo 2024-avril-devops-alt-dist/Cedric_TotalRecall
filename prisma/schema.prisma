@@ -24,7 +24,6 @@ model User {
   image         String?
   reservations  Reservation[]
   passengers    Passenger[]
-  travels       Travel[]     @relation("UserTravels")
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -65,14 +64,12 @@ model Station {
 
 model Travel {
   id_travel      String       @id @default(auto()) @map("_id") @db.ObjectId
-  status_travel  String
   travel_name    String
+  status_travel  String
   flights        Flight[] 
   reservations   Reservation[]
   company        Company?     @relation("CompanyTravels", fields: [company_id], references: [id_company])
   company_id     String       @db.ObjectId
-  user           User?        @relation("UserTravels", fields: [userId], references: [id_user])
-  userId         String?      @db.ObjectId
 
   @@map("Travel")
 }

@@ -32,6 +32,7 @@ const dataProvider = {
       id: item.id_company || item.id_station || item.id_travel || item.id_flight || item.id_reservation,
     }));
 
+    console.log('Data :', data);
     return {
       data: transformedData,
       total: transformedData.length,
@@ -42,6 +43,7 @@ const dataProvider = {
   getOne: async (resource: string, params : GetOneParams) => {
     const url = `${apiUrl}/${resource}/${params.id}`;
     const { data } = await axios.get(url);
+    console.log('Data dans GETONE :', data);
 
     const transformedData = {
       ...data[resource],
@@ -110,24 +112,26 @@ const dataProvider = {
 //---------------------------- UPDATE  -------------------------------//
   update: async (resource: string, params : UpdateParams) => {
     const url = `${apiUrl}/${resource}`;
-    const { id, ...data } = params.data; // Extraire l'ID pour la mise à jour
+    const { id, ...data } = params.data; 
   
-    // Transformer les dates en format ISO-8601
-    if (data.departure_day_time) {
-      data.departure_day_time = new Date(data.departure_day_time).toISOString();
-    }
-    if (data.arrival_day_time) {
-      data.arrival_day_time = new Date(data.arrival_day_time).toISOString();
-    }
-  
-    // Transformer le champ `seats` en entier
-    if (data.seats) {
-      data.seats = parseInt(data.seats, 10);
-    }
-  
-    // Ajouter l'ID dans les données à envoyer uniquement pour les ressources qui en ont besoin
     if (resource === 'flights') {
-      data.id_flight = id;
+        if (data.departure_day_time) {
+        data.departure_day_time = new Date(data.departure_day_time).toISOString();
+        }
+        if (data.arrival_day_time) {
+        data.arrival_day_time = new Date(data.arrival_day_time).toISOString();
+        }
+        if (data.seats) {
+        data.seats = parseInt(data.seats, 10);
+        }
+       data.id_flight = id;
+    }
+    
+    if (resource === 'travels') {
+        // Vérifie que body.id_flight est défini et est un tableau
+    if (data.flights && !Array.isArray(data.flights)) {
+        data.flights = [data.flights];
+      }
     }
   
     console.log('UPDATE request for resource:', resource);
