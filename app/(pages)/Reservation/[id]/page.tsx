@@ -3,10 +3,11 @@
 import React, { useEffect, useState } from "react";
 import Menu from "@/app/components/Menu";
 import dayjs from "dayjs";
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 import useFetchData from "@/lib/useFetchData";
 import { Form, Input, Select, Button } from "antd";
-import PassengerForm from "../../components/Passenger"; 
+import PassengerForm from "../../components/Passenger";
+import Paiement from "../../components/Paiement";
 import "@/app/css/style.css";
 
 const ReservationDetail = () => {
@@ -16,8 +17,10 @@ const ReservationDetail = () => {
   const queryKey = [route, id];
   const { isPending, error, data } = useFetchData(url, queryKey);
 
-  const [passengers, setPassengers] = useState([{}]); 
-  
+  const [passengers, setPassengers] = useState([{}]);
+  const [passengerData, setPassengerData] = useState([]);
+  const [showPayment, setShowPayment] = useState(false);
+
   // Ajout d'un passager
   const addPassenger = () => {
     setPassengers([...passengers, {}]);
@@ -29,10 +32,16 @@ const ReservationDetail = () => {
     setPassengers(updatedPassengers);
   };
 
-
   // Fonction pour soumettre le formulaire
   const onFinish = (values) => {
+    setPassengerData(values.passengers);
+    setShowPayment(true);
     console.log("Formulaire soumis:", values);
+  };
+
+  const handlePaymentFinish = (values) => {
+    console.log("Paiement validé:", values);
+    // Les valeurs contiennent maintenant { travel, passengers }
   };
 
   if (isPending) return "Chargement...";
@@ -55,10 +64,18 @@ const ReservationDetail = () => {
             <div key={flight.id_flight} className="flight">
               <hr />
               <div>
-                Départ le <b>{dayjs(flight.departure_day_time).format("DD/MM/YYYY HH:mm")}</b> de la station{" "}
+                Départ le{" "}
+                <b>
+                  {dayjs(flight.departure_day_time).format("DD/MM/YYYY HH:mm")}
+                </b>{" "}
+                de la station{" "}
                 <b>{flight.departure_station?.station_name || "Unknown"}</b>
                 <br />
-                Arrivée le <b>{dayjs(flight.arrival_day_time).format("DD/MM/YYYY HH:mm")}</b> sur la station{" "}
+                Arrivée le{" "}
+                <b>
+                  {dayjs(flight.arrival_day_time).format("DD/MM/YYYY HH:mm")}
+                </b>{" "}
+                sur la station{" "}
                 <b>{flight.arrival_station?.station_name || "Unknown"}</b>
                 <br />
                 Plus que <b>{flight.seats}</b> places
@@ -68,26 +85,39 @@ const ReservationDetail = () => {
 
           {/* Formulaire de réservation */}
           <Form onFinish={onFinish}>
-          {passengers.map((_, index) => (
+            {passengers.map((_, index) => (
               <PassengerForm
-              key={index}
-              index={index}
-              onAdd={addPassenger}
-              onRemove={removePassenger}
-            />
+                key={index}
+                index={index}
+                onAdd={addPassenger}
+                onRemove={removePassenger}
+              />
             ))}
-            
-            <Form.Item>
-              <Button className="login-button" type="primary" htmlType="submit">
-                Valider ma réservation et accéder au paiement
-              </Button>
-            </Form.Item>
+            {!showPayment && (
+              <Form.Item>
+                <Button
+                  className="login-button"
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Accéder au paiement
+                </Button>
+              </Form.Item>
+            )}
           </Form>
+
+          {showPayment && 
+            <Paiement 
+              onFinish={handlePaymentFinish}
+              travel={travel} 
+              passengers={passengerData}
+            />
+          }
+
         </div>
       </div>
     </div>
   );
 };
-
 
 export default ReservationDetail;
