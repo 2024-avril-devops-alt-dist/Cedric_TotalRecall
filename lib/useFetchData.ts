@@ -1,3 +1,4 @@
+// lib/useFetchData.ts
 import { useQuery } from "@tanstack/react-query";
 
 const useFetchData = (url:string, queryKey:Array<string>) => {

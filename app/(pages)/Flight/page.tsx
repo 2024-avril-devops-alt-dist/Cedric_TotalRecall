@@ -100,10 +100,10 @@ const Flight = () => {
 
                     <Link
                       className="login-button reserve"
-                      href={`/Reservation/${travel.id_travel}`}
+                      href={`/Flight/${travel.id_travel}`}
                       key={travel.id_travel}
                     >
-                      Réserver
+                      Détails du voyage
                     </Link>
                   </div>
                 )}
