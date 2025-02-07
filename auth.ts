@@ -6,6 +6,8 @@ import Credentials from "next-auth/providers/credentials";
 import { signInSchema } from "./lib/zod";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
+import { getToken } from "next-auth/jwt";
+
 
 declare module "next-auth" {
   interface User {
@@ -83,3 +85,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
 });
+
+export async function protectRoute(req: Request) {
+  try {
+    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+
+    if (!token) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    return token;
+  } catch (error) {
+    console.error("Erreur lors de la vérification du token", error);
+    return new Response(
+      JSON.stringify({ error: "Internal Server Error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}

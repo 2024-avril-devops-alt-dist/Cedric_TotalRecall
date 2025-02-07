@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Menu from "../../components/Menu";
 import "../../css/style.css";
+import { Link } from "react-admin";
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -26,7 +27,12 @@ const Profile = () => {
             <button onClick={handleSignOut} className="logout-button">
               Se déconnecter
             </button>
-            <p>Ton rôle est : {session.user?.role} (ne fonctionne pas à rechecker)</p>
+            <p>Ton rôle est : {session.user?.role} </p>
+            {session.user?.role ==="ADMIN" && (
+              <h2>
+                <a className="login-button reserve" href="/Admin" >Acceder à administration</a>
+              </h2>
+            )}
           </div>
         </div>
       </div>
