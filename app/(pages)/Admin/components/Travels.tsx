@@ -57,6 +57,10 @@ export const TravelList = (props : TravelListProps) => (
         label="Nombre de vols"
         render={(record: any) => record.flights ? record.flights.length : 0}
       />
+      <FunctionField
+        label="Réservations"
+        render={(record: any) => record.reservations ? record.reservations.length : 0}
+      />
     </Datagrid>
   </List>
 );

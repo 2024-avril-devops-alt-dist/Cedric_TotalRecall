@@ -10,12 +10,14 @@ import { db } from "@/lib/db";
 declare module "next-auth" {
   interface User {
     role?: string;
+    id_user?: string;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
     role?: string;
+    id_user?: string;
   }
 }
 
@@ -64,11 +66,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   callbacks: {
     jwt({ token, user }) {
-      if (user) token.role = user.role;
+      if (user) {
+        token.role = user.role;
+        token.id_user = user.id_user; 
+      }
       return token;
     },
     session({ session, token }) {
       session.user.role = token.role;
+      session.user.id_user = token.id_user;
       return session;
     },
   },

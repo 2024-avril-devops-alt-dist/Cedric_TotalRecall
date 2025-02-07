@@ -9,36 +9,29 @@ const PassengerForm = ({  index, onAdd, onRemove }) => {
     <Card>
     <div className="passenger-form">
       <h3>Passager {index + 1}</h3>
-      <Form.Item name={["passengers", index, "civility"]} label="Civilité">
-        <Select placeholder="Civilité" allowClear>
-          <Option value="M.">M.</Option>
-          <Option value="Mme">Mme</Option>
-          <Option value="None">Non renseigné</Option>
-        </Select>
-      </Form.Item>
       <Form.Item
-        name={["passengers", index, "firstName"]}
+        name={["passengers", index, "first_name"]}
         label="Prénom"
         rules={[{ required: true, message: "Le prénom est obligatoire" }]}
       >
         <Input placeholder="Prénom" />
       </Form.Item>
       <Form.Item
-        name={["passengers", index, "lastName"]}
+        name={["passengers", index, "last_name"]}
         label="Nom"
         rules={[{ required: true, message: "Le nom est obligatoire" }]}
       >
         <Input placeholder="Nom" />
       </Form.Item>
       <Form.Item
-        name={["passengers", index, "birthdate"]}
+        name={["passengers", index, "DOB"]}
         label="Date de naissance"
         rules={[{ required: true, message: "La date de naissance est obligatoire" }]}
       >
-        <DatePicker placeholder="Date de naissance" style={{ width: "100%" }} />
+        <DatePicker placeholder="Date de naissance" style={{ width: "100%" }} format="YYYY-MM-DD" />
       </Form.Item>
       <Form.Item
-        name={["passengers", index, "email"]}
+        name={["passengers", index, "mail"]}
         label="Email"
         rules={[
           { required: true, message: "L'email est obligatoire" },
