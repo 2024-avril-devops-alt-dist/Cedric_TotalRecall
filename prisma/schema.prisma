@@ -39,6 +39,7 @@ model Passenger {
   DOB           DateTime
   user          User?        @relation(fields: [userId], references: [id_user])
   userId        String?      @db.ObjectId
+  reservations  Reservation[]
 
   @@map("Passenger")
 }
@@ -95,11 +96,12 @@ model Reservation {
   id_travel          String     @db.ObjectId
   id_company         String     @db.ObjectId
   id_user            String     @db.ObjectId
-  id_passenger       String
+  id_passenger       String     @db.ObjectId
   status_reservation String?
   travel             Travel     @relation(fields: [id_travel], references: [id_travel])
   company            Company    @relation(fields: [id_company], references: [id_company])
   user               User       @relation(fields: [id_user], references: [id_user])
+  passenger          Passenger  @relation(fields: [id_passenger], references: [id_passenger])
 
   @@map("Reservation")
 }

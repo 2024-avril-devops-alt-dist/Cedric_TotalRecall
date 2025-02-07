@@ -100,45 +100,137 @@ async function main() {
   });
 
   // Créer les voyages et les vols
- /* const travel1 = await prisma.travel.create({
+  const travel1 = await prisma.travel.create({
     data: {
       id_travel: '677e1be3c9a7d52bcd8b241a',
       status_travel: 'Active',
       travel_name: 'Voyage Terre Lune',
       company: {
         connect: { id_company: companyAirTerre.id_company },
-      },
-      flights: {
-        create: [
-          {
-            id_flight: '677e1c74c9a7d52bcd8b2430',
-            departure_day_time: new Date('2024-10-01T00:00:00.000Z'),
-            arrival_day_time: new Date('2024-10-02T00:00:00.000Z'),
-            departure_station: {
-              connect: { id_station: stationTerre.id_station },
-            },
-            arrival_station: {
-              connect: { id_station: stationLune.id_station },
-            },
-            seats: 100,
-          },
-          {
-            id_flight: '677e1c74c9a7d52bcd8b2431',
-            departure_day_time: new Date('2024-10-02T12:00:00.000Z'),
-            arrival_day_time: new Date('2024-10-05T00:00:00.000Z'),
-            departure_station: {
-              connect: { id_station: stationLune.id_station },
-            },
-            arrival_station: {
-              connect: { id_station: stationTitan.id_station },
-            },
-            seats: 100,
-          },
-        ],
-      },
+      }
     },
   });
-
+  
+  const travel2 = await prisma.travel.create({
+    data: {
+      id_travel: '677e1be3c9a7d52bcd8b242a',
+      status_travel: 'Active',
+      travel_name: 'Voyage Lune Saturne',
+      company: {
+        connect: { id_company: companyAirTitan.id_company },
+      }
+    },
+  });
+  
+  const travel3 = await prisma.travel.create({
+    data: {
+      id_travel: '677e1be3c9a7d52bcd8b243a',
+      status_travel: 'Active',
+      travel_name: 'Voyage Mars Neptune',
+      company: {
+        connect: { id_company: companyAirTitan.id_company },
+      }
+    },
+  });
+  
+  const travel4 = await prisma.travel.create({
+    data: {
+      id_travel: '677e1be3c9a7d52bcd8b244a',
+      status_travel: 'Active',
+      travel_name: 'Terre Titan',
+      company: {
+        connect: { id_company: companyAirTitan.id_company },
+      }
+    },
+  });
+  
+  // Créer les voyages et les vols
+  const flight1 = await prisma.flight.create({
+    data: {
+      id_flight: '677e1d0cc9a7d52bcd8b2445',
+      departure_day_time: new Date('2024-10-11T00:00:00.000Z'),
+      arrival_day_time: new Date('2024-10-12T00:00:00.000Z'),
+      departure_station: {
+        connect: { id_station: stationTerre.id_station },
+      },
+      arrival_station: {
+        connect: { id_station: stationLune.id_station },
+      },
+      travel: {
+        connect: { id_travel: travel1.id_travel },
+      },
+      seats: 500,
+    },
+  });
+  const flight2 = await prisma.flight.create({
+    data: {
+      id_flight: '677e1d0cc9a7d52bcd8b2446',
+      departure_day_time: new Date('2024-10-11T00:00:00.000Z'),
+      arrival_day_time: new Date('2024-10-12T00:00:00.000Z'),
+      departure_station: {
+        connect: { id_station: stationLune.id_station },
+      },
+      arrival_station: {
+        connect: { id_station: stationSaturne.id_station },
+      },
+      travel: {
+        connect: { id_travel: travel2.id_travel },
+      },
+      seats: 300,
+    },
+  });
+  const flight3 = await prisma.flight.create({
+    data: {
+      id_flight: '677e1d0cc9a7d52bcd8b2447',
+      departure_day_time: new Date('2024-10-11T00:00:00.000Z'),
+      arrival_day_time: new Date('2024-10-12T00:00:00.000Z'),
+      departure_station: {
+        connect: { id_station: stationMars.id_station },
+      },
+      arrival_station: {
+        connect: { id_station: stationNeptune.id_station },
+      },
+      travel: {
+        connect: { id_travel: travel3.id_travel },
+      },
+      seats: 200,
+    },
+  });
+  const flight4 = await prisma.flight.create({
+    data: {
+      id_flight: '677e1d0cc9a7d52bcd8b2448',
+      departure_day_time: new Date('2024-10-11T00:00:00.000Z'),
+      arrival_day_time: new Date('2024-10-12T00:00:00.000Z'),
+      departure_station: {
+        connect: { id_station: stationTerre.id_station },
+      },
+      arrival_station: {
+        connect: { id_station: stationTitan.id_station },
+      },
+      travel: {
+        connect: { id_travel: travel4.id_travel },
+      },
+      seats: 500,
+    },
+  });
+  const flight5 = await prisma.flight.create({
+    data: {
+      id_flight: '677e1d0cc9a7d52bcd8b2449',
+      departure_day_time: new Date('2024-10-11T00:00:00.000Z'),
+      arrival_day_time: new Date('2024-10-12T00:00:00.000Z'),
+      departure_station: {
+        connect: { id_station: stationTitan.id_station },
+      },
+      arrival_station: {
+        connect: { id_station: stationNeptune.id_station },
+      },
+      travel: {
+        connect: { id_travel: travel4.id_travel },
+      },
+      seats: 500,
+    },
+  });
+/*
   const travel2 = await prisma.travel.create({
     data: {
       id_travel: '677e1bfec9a7d52bcd8b2422',
@@ -203,7 +295,7 @@ async function main() {
   }); */
 
   // Créer les passagers
-  const passenger1 = await prisma.passenger.create({
+/*  const passenger1 = await prisma.passenger.create({
     data: {
       id_passenger: '677e1e0ec9a7d52bcd8b2470',
       first_name: 'Prenom',
@@ -227,7 +319,7 @@ async function main() {
         connect: { id_user: '677e1d51c9a7d52bcd8b2457' },
       },
     },
-  });
+  });*/
 }
 
 
